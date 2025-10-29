@@ -1,0 +1,30 @@
+{
+  "name": "portfolio-website",
+  "version": "1.0.0",
+  "description": "Personal portfolio website with contact form integration",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'Static site - no build needed'",
+    "start": "vercel dev"
+  },
+  "dependencies": {
+    "@sendingblue/client": "^1.4.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "portfolio",
+    "contact-form",
+    "brevo",
+    "vercel",
+    "static-site"
+  ],
+  "author": "Steeve",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Steeveuk/portfolio.git"
+  }
+}
