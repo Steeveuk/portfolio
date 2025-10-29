@@ -1,9 +1,9 @@
-import { SibApiV3Sdk } from "@sendingblue/client";
+import brevo from "@getbrevo/brevo";
 
 // Initialize Brevo API client
-const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
+let apiInstance = new brevo.TransactionalEmailsApi();
 apiInstance.setApiKey(
-  SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey,
+  brevo.TransactionalEmailsApiApiKeys.apiKey,
   process.env.BREVO_API_KEY
 );
 
