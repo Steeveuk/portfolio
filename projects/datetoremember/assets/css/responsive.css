@@ -1,0 +1,475 @@
+@media screen and (max-width: 1500px) {
+  form {
+    width: calc(100% - 40px);
+    margin: 30px 20px 20px;
+  }
+  .modal .button {
+    width: 100%;
+  }
+  .registration-intro {
+    padding: 0 20px;
+  }
+  .login-intro .button {
+    width: calc(100% - 40px);
+    margin: 30px 20px 0;
+  }
+  .modal form .button,
+  form .button {
+    margin: 10px 0 20px;
+  }
+  form .checkbox {
+    margin-bottom: 30px;
+  }
+  form .password-container .note {
+    padding: 20px 60px 10px;
+  }
+  .modal .inner {
+    width: 70%;
+  }
+}
+
+@media (max-width: 1300px) {
+  .page-template-template-about .team-member {
+    display: flex;
+  }
+  .page-template-template-about .team-member.right {
+    flex-direction: row-reverse;
+  }
+  .page-template-template-about .image-switcher {
+    width: 33%;
+  }
+  .page-template-template-about .team-member .description {
+    width: 55%;
+  }
+  .page-template-template-about .image-switcher {
+    display: block;
+    margin: 0 auto !important;
+  }
+  .page-template-template-about .image-switcher .image-container {
+    overflow: initial;
+  }
+  .page-template-template-about .image-switcher {
+    transform: rotate(0) !important;
+  }
+  .page-template-template-about .image-switcher .image-container > div.image-one {
+    opacity: 0;
+    margin-left: 30px;
+    transform: rotate(10deg);
+  }
+  .page-template-template-about .image-switcher .image-container > div.image-two {
+    opacity: 1;
+    margin-left: -30px;
+    transform: rotate(-10deg);
+  }
+  .page-template-template-about .team-member .description {
+    margin: 20px 0 !important;
+  }
+  .modal .inner {
+    width: 80%;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .hide-above-1000 {
+    display: none;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .hide-1000 {
+    display: none;
+  }
+  .modal {
+    cursor: auto;
+  }
+  .modal .inner {
+    width: 80%;
+  }
+  #content.site-content {
+    margin: 0 10px;
+  }
+  .table-container {
+    width: 100%;
+    overflow-x: scroll
+  }
+  .table-container th {
+    min-width: 200px;
+  }
+  .component.card.wide {
+    flex-direction: column;
+  }
+  .modal #event-modal .top-card .bottom,
+  .component.card.wide .image,
+  .component.card.wide .information,
+  .component.card.wide .inner {
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+  .component.card.wide .title-description {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 20px;
+  }
+  .component.card.wide .information {
+    padding: 0 20px 20px;
+    margin: 0 !important;
+    text-align: left !important;
+  }
+  .component.card.wide .button {
+    position: relative !important;
+    margin: 10px 0 !important;
+    width: 100% !important;
+    left: 0 !important;
+    top: 0 !important;
+  }
+  .component.card .image img {
+    max-height: 200px;
+  }
+  .page-template-template-account .component.card.wide .information .qr-code {
+    position: relative;
+    top: 0;
+    bottom: 0;
+    right: 0;
+  }
+  .page-template-template-account .component.card.wide .information .qr-code .qr-container {
+    width: 300px;
+    max-width: 100%;
+    margin: 40px auto;
+  }
+  .page-template-template-account .component.card.wide .card-note {
+    width: 100%;
+  }
+  .page-template-template-account .component.card.wide .inner {
+    margin-left: 0;
+  }
+  .modal #event-modal .top-card .bottom .right,
+  .modal #event-modal .top-card .bottom .left {
+    text-align: center;
+    width: 100%;
+  }
+  .cards.grid {
+    column-gap: 4%;
+  }
+  .cards.grid .component.card {
+    width: 48%;
+  }
+}
+@media screen and (min-width: 768px) {
+  .hide-above-768 {
+    display: none;
+  }
+}
+@media screen and (max-width: 768px) {
+  .hide-768 {
+    display: none;
+  }
+  .home #section-3 .gradient-button {
+    margin-top: 50px;
+  }
+  .page-template-template-account .navigation ul {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .page-template-template-account .navigation ul li {
+    margin-bottom: 0;
+  }
+  .page-template-template-account .component.card.wide .inner .title-description {
+    padding: 0;
+  }
+  .page-template-template-account .component.card.wide .inner .title-description .title {
+    margin: 0;
+    padding: 20px;
+  }
+  .page-template-template-account .component.card.wide .inner {
+    margin: 0;
+  }
+  .page-template-template-account .component.card.wide .information {
+    padding: 0 20px 30px;
+  }
+  .modal #ticket-modal .ticket {
+    padding: 20px;
+  }
+  .modal #ticket-modal .ticket h3 {
+    padding: 0;
+  }
+  .modal #ticket-modal h3 {
+    padding: 0 40px 0;
+  }
+  .modal #ticket-modal .ticket .ticket-info {
+    padding: 0 10px;
+  }
+  .cols > .row {
+    flex-direction: column;
+  }
+  .cols > .row .col {
+    width: 100% !important;
+  }
+  .col-pad {
+    padding: 30px 20px;
+  }
+  #masthead {
+    height: 70px;
+  }
+  #masthead .burger {
+    display: flex;
+    outline: none;
+  }
+  #masthead .account a {
+    outline: none;
+    padding-right: 0;
+  }
+  #masthead::after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    z-index: -1;
+  }
+  #masthead .account span {
+    display: none;
+  }
+  #masthead #site-navigation {
+    background: white;
+    height: 70px;
+    box-shadow: 0px 4px 5px #DAA7F3;
+    top: 0;
+    z-index: -1;
+    transition: .5s all;
+  }
+  #masthead #site-navigation svg {
+    display: none;
+  }
+  .menu-open #masthead #site-navigation {
+    top: 60px;
+  }
+  #masthead #site-navigation .menu-header-menu-container {
+    width: 45%;
+  }
+  #hero-cover .image {
+    margin-top: 10px;
+  }
+  #masthead .site-branding {
+    margin: 10px 20px;
+  }
+  #masthead .social-share-page {
+    top: 55px;
+  }
+  .sec:not(.col-pad) .col .button{
+    width: 90%;
+    margin: 0 auto;
+  }
+  .col:not(.col-pad) form .button{
+    width: 100%;
+  }
+  .widget.gradient-button,
+  .button,
+  .button span {
+    width: 100%;
+    font-size: 18px !important;
+    line-height: 18px !important;
+    margin: 0;
+  }
+  .widget.carousel-slider .component.card .image img {
+    height: 200px;
+  }
+  .modal .inner {
+    width: 90%;
+  }
+  .single-post #hero-cover h1 {
+    font-size: 45px;
+    line-height: 38px;
+    margin-bottom: 0;
+  }
+  .single-post #hero-cover h2 {
+    font-size: 20px;
+  }
+  #hero-cover .image {
+    background-size: 140% 85%;
+    min-height: 60vh;
+    margin-top: 73px;
+  }
+  /* .page-template-template-events #hero-cover .image {
+    background-size: 220% 90%;
+  } */
+  .admin-bar #hero-cover .image {
+    margin-top: 24px;
+  }
+  #hero-cover h1 {
+    font-size: 110px;
+    line-height: 90px;
+  }
+  #hero-cover h2 {
+    font-size: 30px;
+  }
+  .page-template-template-account .navigation {
+    border-bottom: 1px solid #d4d4d4;
+    border-right: none;
+  }
+  .widget.countdown-clock .clock {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+  }
+  .page-template-template-about .team-member {
+    display: block;
+  }
+  .page-template-template-about .team-member .description {
+    width: 100%;
+  }
+  .page-template-template-about .image-switcher {
+    float: none !important;
+    margin: 20px auto !important;
+    width: 270px;
+  }
+  .page-template-template-account .component.card.wide .information .card-note {
+    width: 100%;
+  }
+  .page-template-template-account .component.card.wide .qr-code.placeholder {
+    margin: 20px auto 0;
+  }
+  .page-template-template-events #ticket-modal .follow-us-instagram {
+    max-width: 90%;
+  }
+  .cards.grid {
+    column-gap: 0;
+  }
+  .cards.grid .component.card {
+    width: 100%;
+  }
+}
+@media screen and (min-width: 600px) {
+  .hide-above-600 {
+    display: none;
+  }
+}
+@media screen and (max-width: 600px) {
+  .hide-600 {
+    display: none;
+  }
+  #hero-cover h1 {
+    font-size: 80px;
+    line-height: 70px;
+  }
+  #wpadminbar {
+    opacity: .2;
+  }
+  .logged-in #masthead {
+    top: 0;
+  }
+  h2 {
+    font-size: 30px;
+    line-height: 40px;
+  }
+  .single-post #hero-cover img {
+    height: 300px;
+    object-fit: initial;
+  }
+  .modal #event-modal .top-card .bottom h2 {
+    width: 100%;
+    font-size: 24px;
+    line-height: 32px;
+  }
+  .modal #event-modal .bottom-card {
+    padding: 0 30px 40px;
+  }
+  .modal #error-modal .inner p {
+    padding: 0 20px;
+  }
+  .modal .registration .register button.style-2 span, 
+  .modal .registration .login button.style-2 span {
+    font-size: 18px;
+  }
+  form .password-container .note {
+    padding: 10px 0;
+  }
+  form .checkbox input[type="checkbox"]{
+    margin: 10px 20px 10px;
+  }
+  form .checkbox label{
+    padding: 0;
+  }
+  .modal #ticket-modal .gender-buttons {
+    flex-direction: column;
+    gap: 0;
+  }
+  .page-template-template-account .checkbox > input[type="checkbox"] {
+    margin: 10px 0;
+  }
+  .breadcrumbs .progress-container {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .breadcrumbs .progress-container .step {
+    min-width: 185px;
+    font-size: 13px;
+  }
+  .breadcrumbs .progress-container .step {
+    border-radius: 20px !important;
+    clip-path: unset !important;
+  }
+}
+
+@media screen and (min-width: 500px) {
+  .hide-above-500 {
+    display: none;
+  }
+}
+@media screen and (max-width: 500px) {
+  .hide-500 {
+    display: none;
+  }
+  .host img {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+@media screen and (min-width: 425px) {
+  .hide-above-425 {
+    display: none;
+  }
+}
+@media screen and (max-width: 425px) {
+  .hide-425 {
+    display: none;
+  }
+  span, p {
+    font-size: 18px;
+    line-height: 28px;
+  }
+  .modal .inner .button.style-2 span,
+  .card .button.style-2 span,
+  .button.style-2 span,
+  input[type="submit"],
+  .card .button,
+  .progress-container .step.current,
+  .button {
+    -webkit-animation-play-state: running;
+            animation-play-state: running;
+
+  }
+  .widget.scrolling-ticker .ticker-item {
+    width: 300px;
+    margin-right: 30px;
+  }
+  .widget.gradient-button,
+  .button,
+  .button span {
+    font-size: 16px !important;
+  }
+}
+@media screen and (max-width: 375px) {
+  .widget.gradient-button,
+  .button,
+  .button span {
+    font-size: 14px !important;
+  }
+  .progress-container .step {
+    min-width: 180px;
+    font-size: 12px;
+  }
+}

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking System</title>
+  <link rel="stylesheet" href="assets/css/booking-system.css?v=1.0.0">
+</head>
+<body>
+  <div id="booking-system">
+    <div class="wrap">
+      <h1>Booking System</h1>
+
+      <div class="admin-settings-toggle-wrap">
+        <button type="button" class="admin-settings-toggle" id="admin-settings-toggle" aria-pressed="true" aria-label="Toggle admin settings">
+          <span class="toggle-slider"></span>
+        </button>
+        <h2>Admin Settings</h2>
+      </div>
+      <div class="settings" id="admin-settings-panel">
+        <form id="admin-settings-form" style="margin-bottom: 24px;">
+          <div class="form-group">
+            <label for="time-interval">Time Interval</label>
+            <select name="time-interval" id="time-interval">
+              <option value="15">15 minutes</option>
+              <option value="30">30 minutes</option>
+              <option value="45">45 minutes</option>
+              <option value="60" selected>60 minutes</option>
+            </select>
+            <span>minutes</span>
+          </div>
+          <div class="form-group">
+            <label>Available Days:</label>
+            <div id="days-checkboxes">
+              <label><input type="checkbox" name="days" value="1" checked> Monday</label>
+              <label><input type="checkbox" name="days" value="2" checked> Tuesday</label>
+              <label><input type="checkbox" name="days" value="3" checked> Wednesday</label>
+              <label><input type="checkbox" name="days" value="4" checked> Thursday</label>
+              <label><input type="checkbox" name="days" value="5" checked> Friday</label>
+              <label><input type="checkbox" name="days" value="6" checked> Saturday</label>
+              <label><input type="checkbox" name="days" value="0" checked> Sunday</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Available Timeframe:</label>
+            <div class="time-picker">
+              <label for="start-time">Start Time:</label>
+              <input type="time" id="start-time" name="start-time" value="09:00" required>
+              <label for="end-time">End Time:</label>
+              <input type="time" id="end-time" name="end-time" value="18:00" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Theme:</label>
+            <div id="theme-options">
+              <label class="theme-option-btn selected" data-theme="sapphire"><input type="radio" name="theme" value="sapphire" checked> Sapphire</label>
+              <label class="theme-option-btn" data-theme="ruby"><input type="radio" name="theme" value="ruby"> Ruby</label>
+              <label class="theme-option-btn" data-theme="gold"><input type="radio" name="theme" value="gold"> Gold</label>
+            </div>
+          </div>
+          <button type="submit">Save Settings</button>
+          <span id="admin-settings-saved" style="display:none;">Saved!</span>
+        </form>
+      </div>
+
+      <h2>Book Your Slot</h2>
+      <form id="booking-form" autocomplete="off">
+        <div class="form-group">
+          <label for="name">Name <span class="required-asterisk">*</span></label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email <span class="required-asterisk">*</span></label>
+          <input type="text" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="date">Date &amp; Time <span class="required-asterisk">*</span></label>
+          <div id="calendar"></div>
+        </div>
+        <div class="form-group">
+          <label for="instructions">Special Instructions</label>
+          <input type="text" id="instructions" name="instructions" placeholder="Optional">
+        </div>
+        <input type="submit" value="Book Now" id="book-btn">
+      </form>
+      <div id="calendar-output"></div>
+      <div id="success-message" class="success-message" style="display:none;">Booking added!</div>
+      <h2 style="margin-top:40px;">Your Bookings</h2>
+      <div class="booking-list" id="booking-list"></div>
+    </div>
+  </div>
+  <script src="assets/js/booking-system.js?v=1.0.0"></script>
+</body>
+</html> 

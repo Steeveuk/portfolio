@@ -1,0 +1,11 @@
+@media screen and (max-width: 768px) {
+  .card.expanded {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .card.expanded {
+    max-height: 2000px;
+  }
+}

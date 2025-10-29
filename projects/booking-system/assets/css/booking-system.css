@@ -1,0 +1,816 @@
+/* booking-system.css: Custom styles for the Booking System UI */
+
+/* === CSS VARIABLES === */
+:root {
+  /* Sapphire Theme Colors */
+  --sapphire-primary: #2196f3;
+  --sapphire-secondary: #1769aa;
+  --sapphire-accent: #90caf9;
+  --sapphire-bg: #23272e;
+  --sapphire-bg-dark: #181c20;
+  --sapphire-text: #b3e5fc;
+  --sapphire-text-selected: #ffffff;
+  --sapphire-text-muted: #444a54;
+  --sapphire-success: #048c9b;
+  --sapphire-shadow: rgba(33, 150, 243, 0.5);
+  --sapphire-shadow-light: rgba(33, 150, 243, 0.1);
+  
+  /* Ruby Theme Colors */
+  --ruby-primary: #e53935;
+  --ruby-secondary: #a31515;
+  --ruby-accent: #ffb3b3;
+  --ruby-bg: #2a1416;
+  --ruby-bg-dark: #1a0a0c;
+  --ruby-text: #f65a5a;
+  --ruby-text-selected: #ffffff;
+  --ruby-text-muted: #7a4a4c;
+  --ruby-success: #b71c1c;
+  --ruby-shadow: rgba(229, 57, 53, 0.5);
+  --ruby-shadow-light: rgba(229, 57, 53, 0.1);
+  
+  /* Gold Theme Colors */
+  --gold-primary: #c2a824;
+  --gold-secondary: #9b880a;
+  --gold-accent: #ffe082;
+  --gold-bg: #23200e;
+  --gold-bg-dark: #181600;
+  --gold-text: #dcaa14;
+  --gold-text-selected: #ffffff;
+  --gold-text-muted: #bfa600;
+  --gold-success: #bfa600;
+  --gold-shadow: rgba(255, 214, 0, 0.5);
+  --gold-shadow-light: rgba(255, 214, 0, 0.1);
+}
+
+/* === BASE STYLES === */
+html, body, *, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  background: #1e1e1e;
+  color: #f3f3f3;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  min-height: 100vh;
+}
+
+#booking-system {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#booking-system label {
+  color: var(--sapphire-text);
+}
+
+#booking-system .wrap {
+  width: 750px;
+  margin: 40px auto;
+  background: var(--sapphire-bg);
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.45);
+  padding: 38px 32px 44px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: max-width 0.3s cubic-bezier(.4,2,.6,1);
+}
+
+#booking-system h1 {
+  margin-bottom: 28px;
+  font-size: 2.1rem;
+  letter-spacing: 0.5px;
+  color: var(--sapphire-primary);
+}
+
+#booking-system h2 {
+  color: var(--sapphire-primary);
+}
+
+#booking-system form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+#booking-system .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+#booking-system input[type="text"],
+#booking-system input[type="email"],
+#booking-system input[type="date"],
+#booking-system input[type="time"] {
+  background: var(--sapphire-bg-dark);
+  color: var(--sapphire-text);
+  border: 1px solid var(--sapphire-primary);
+  border-radius: 7px;
+  padding: 10px 13px;
+  font-size: 1rem;
+  transition: border 0.2s;
+}
+
+#booking-system input[type="text"]:focus,
+#booking-system input[type="email"]:focus,
+#booking-system input[type="date"]:focus,
+#booking-system input[type="time"]:focus {
+  border: 1.5px solid var(--sapphire-primary);
+  outline: none;
+}
+
+#booking-system input[type="submit"],
+#booking-system button[type="submit"] {
+  background: var(--sapphire-primary);
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  padding: 12px 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 8px;
+  box-shadow: 0 2px 8px var(--sapphire-shadow-light);
+  transition: box-shadow 0.25s, transform 0.18s, background 0.25s;
+  outline: none;
+}
+
+#booking-system input[type="submit"]:hover:enabled,
+#booking-system button[type="submit"]:hover:enabled {
+  background: var(--sapphire-secondary);
+  box-shadow: 0 4px 16px var(--sapphire-shadow-light);
+  transform: translateY(-2px) scale(1.04);
+}
+
+#booking-system input[type="submit"]:active:enabled,
+#booking-system button[type="submit"]:active:enabled {
+  background: var(--sapphire-secondary);
+  color: #fff;
+  box-shadow: 0 1px 4px var(--sapphire-shadow-light);
+  transform: scale(0.98);
+}
+
+#booking-system .booking-list {
+  margin-top: 32px;
+  width: 100%;
+}
+#booking-system .booking-list .booking-item-content {
+  flex: 1;
+}
+#booking-system .booking-list .booking-item-content .email {
+  color: var(--sapphire-accent);
+}
+#booking-system .booking-list .booking-item-content .date {
+  color: var(--sapphire-text);
+}
+#booking-system .booking-list .booking-item-content .instructions {
+  color: var(--sapphire-accent);
+}
+
+#booking-system .booking-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--sapphire-bg);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.4s cubic-bezier(.4,2,.6,1);
+}
+
+#booking-system .booking-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#booking-system .remove-btn {
+  background: var(--sapphire-primary);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+#booking-system .remove-btn:hover {
+  background: var(--sapphire-secondary);
+}
+
+#booking-system .remove-btn:active {
+  background: var(--sapphire-secondary);
+  transform: scale(0.98);
+}
+
+#booking-system .success-message {
+  background: var(--sapphire-success);
+  color: #fff;
+  border-radius: 8px;
+  padding: 10px 16px;
+  margin-bottom: 18px;
+  text-align: center;
+  animation: fadeIn 0.7s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; } 
+  to { opacity: 1; }
+}
+
+#calendar-output {
+  width: 100%;
+  margin: 0 auto 18px auto;
+  background: var(--sapphire-bg-dark);
+  color: var(--sapphire-text);
+  border-radius: 10px;
+  box-shadow: 0 2px 8px var(--sapphire-shadow-light);
+  padding: 18px 22px;
+  font-size: 1.13rem;
+  min-height: 36px;
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+  transition: opacity 0.5s cubic-bezier(.4,2,.6,1), transform 0.5s cubic-bezier(.4,2,.6,1);
+}
+
+#calendar-output.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* === CALENDAR STYLES === */
+#calendar {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto 18px auto;
+  background: var(--sapphire-bg-dark);
+  color: var(--sapphire-text);
+  border-radius: 10px;
+  box-shadow: 0 2px 8px var(--sapphire-shadow-light);
+  padding: 18px 22px 22px 22px;
+  font-size: 1.13rem;
+  min-height: 36px;
+  user-select: none;
+  transition: box-shadow 0.3s;
+  overflow-x: auto;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.calendar-header,
+.calendar-days-row,
+.calendar-grid {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.calendar-nav {
+  background: var(--sapphire-bg);
+  color: var(--sapphire-text);
+  border: none;
+  border-radius: 6px;
+  font-size: 1.3rem;
+  padding: 2px 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.calendar-nav:hover {
+  background: var(--sapphire-primary);
+  color: #fff;
+}
+
+.calendar-nav:active {
+  background: var(--sapphire-secondary);
+  transform: scale(0.98);
+}
+
+.calendar-month-year {
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+}
+
+.calendar-month-select,
+.calendar-year-select {
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  background: var(--sapphire-bg);
+  color: var(--sapphire-text);
+  border: 1.5px solid var(--sapphire-primary);
+  border-radius: 6px;
+  padding: 2px 12px;
+  margin: 0 8px;
+}
+
+.calendar-days-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 4px;
+  font-size: 0.98em;
+  color: var(--sapphire-accent);
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.calendar-day-label {
+  text-align: center;
+  font-weight: 600;
+  padding: 2px 0;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.calendar-cell {
+  text-align: center;
+  padding: 8px 0;
+  border-radius: 6px;
+  box-sizing: border-box;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  background: var(--sapphire-bg);
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+  outline: none;
+  border: 2px solid transparent;
+  box-shadow: 0 1px 2px var(--sapphire-shadow-light);
+}
+
+.calendar-cell.selected {
+  background: var(--sapphire-primary);
+  color: #fff;
+  border: 2px solid var(--sapphire-accent);
+  box-shadow: 0 2px 8px var(--sapphire-shadow-light);
+  animation: calendarSelect 0.3s cubic-bezier(.4,2,.6,1);
+}
+
+@keyframes calendarSelect {
+  from { transform: scale(0.85); opacity: 0.5; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.calendar-cell.disabled {
+  background: var(--sapphire-bg);
+  color: var(--sapphire-text-muted);
+  cursor: not-allowed;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.calendar-cell.empty {
+  background: transparent;
+  cursor: default;
+  pointer-events: none;
+  box-shadow: none;
+}
+
+/* === TIME PICKER STYLES === */
+.time-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0 18px 0;
+  justify-content: flex-start;
+}
+
+.time-slot-btn {
+  background: var(--sapphire-bg);
+  color: var(--sapphire-text);
+  border: 1.5px solid var(--sapphire-primary);
+  border-radius: 6px;
+  padding: 7px 16px;
+  font-size: 1.04rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s, border 0.18s, box-shadow 0.18s;
+  outline: none;
+  box-shadow: 0 1px 2px var(--sapphire-shadow-light);
+}
+
+.time-slot-btn.selected, 
+.time-slot-btn:focus {
+  background: var(--sapphire-primary);
+  color: #fff;
+  border: 1.5px solid var(--sapphire-accent);
+  box-shadow: 0 2px 8px var(--sapphire-shadow-light);
+  animation: calendarSelect 0.3s cubic-bezier(.4,2,.6,1);
+}
+
+.time-slot-btn:hover:not(.selected) {
+  background: var(--sapphire-secondary);
+  color: #fff;
+  border: 1.5px solid var(--sapphire-primary);
+}
+
+.time-slot-btn:active {
+  background: var(--sapphire-secondary);
+  transform: scale(0.98);
+}
+
+.no-slots {
+  color: #ff6b6b;
+  font-weight: 600;
+  padding: 8px 0;
+  width: 100%;
+  text-align: center;
+}
+
+.calendar-error {
+  background: #bb2727;
+  color: #fff;
+  border-radius: 8px;
+  padding: 10px 16px;
+  margin: 8px 0 0 0;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.08rem;
+  animation: fadeIn 0.5s;
+}
+
+.required-asterisk {
+  color: #ff6b6b;
+  margin-left: 2px;
+  font-size: 1.1em;
+  vertical-align: middle;
+}
+
+/* === ADMIN SETTINGS STYLES === */
+#booking-system .settings {
+  background: var(--sapphire-bg);
+  border-radius: 14px;
+  box-shadow: 0 4px 24px var(--sapphire-shadow-light);
+  padding: 32px 28px 18px 28px;
+  margin-bottom: 32px;
+  width: 100%;
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+#booking-system .settings h2 {
+  color: var(--sapphire-primary);
+  margin-top: 0;
+  margin-bottom: 18px;
+  font-size: 1.6rem;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+#booking-system #admin-settings-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+#booking-system #admin-settings-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+#booking-system #admin-settings-form label {
+  color: var(--sapphire-text);
+  font-weight: 500;
+  margin-bottom: 2px;
+  font-size: 1rem;
+}
+#booking-system #admin-settings-form label.selected {
+  color: var(--sapphire-text-selected);
+}
+
+#booking-system #admin-settings-form select,
+#booking-system #admin-settings-form input[type="time"] {
+  background: var(--sapphire-bg-dark);
+  border: 1px solid var(--sapphire-primary);
+  padding: 8px 12px;
+  border-radius: 7px;
+  color: var(--sapphire-text);
+  font-size: 1rem;
+  margin-right: 8px;
+  margin-bottom: 0;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#booking-system #admin-settings-form select:focus,
+#booking-system #admin-settings-form input[type="time"]:focus {
+  border-color: var(--sapphire-primary);
+  box-shadow: 0 0 0 2px var(--sapphire-shadow-light);
+  outline: none;
+}
+
+#booking-system #admin-settings-form #days-checkboxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  margin-top: 2px;
+}
+
+#booking-system #admin-settings-form #days-checkboxes label {
+  color: var(--sapphire-text);
+  font-weight: 400;
+  font-size: 0.98rem;
+  background: var(--sapphire-bg-dark);
+  border-radius: 6px;
+  padding: 4px 10px 4px 6px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+#booking-system #admin-settings-form #days-checkboxes label:hover {
+  border-color: var(--sapphire-primary);
+  background: var(--sapphire-bg);
+}
+
+#booking-system #admin-settings-form #days-checkboxes input[type="checkbox"] {
+  accent-color: var(--sapphire-primary);
+  margin-right: 6px;
+  width: 16px;
+  height: 16px;
+}
+
+#booking-system #admin-settings-form button[type="submit"] {
+  background: var(--sapphire-primary);
+  color: #fff;
+  border: none;
+  padding: 12px 0;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
+  box-shadow: 0 2px 8px var(--sapphire-shadow-light);
+}
+
+#booking-system #admin-settings-form button[type="submit"]:hover {
+  background: var(--sapphire-secondary);
+  color: #fff;
+}
+
+#booking-system #admin-settings-form button[type="submit"]:active {
+  background: var(--sapphire-secondary);
+  transform: scale(0.98);
+}
+
+#booking-system #admin-settings-form #admin-settings-saved {
+  color: var(--sapphire-success);
+  font-size: 1rem;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+#booking-system #admin-settings-form span[for="time-interval"] {
+  color: var(--sapphire-text);
+  font-size: 0.95rem;
+  margin-left: 6px;
+}
+
+/* === THEME BUTTONS === */
+#theme-options {
+  display: flex;
+  gap: 10px;
+}
+
+#theme-options input[type="radio"] {
+  display: none;
+}
+
+.theme-option-btn {
+  display: inline-block;
+  padding: 7px 18px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 2px solid transparent;
+  background: var(--sapphire-bg);
+  color: var(--sapphire-text);
+  transition: background 0.18s, color 0.18s, border 0.18s, box-shadow 0.18s;
+  outline: none;
+  box-shadow: 0 1px 2px var(--sapphire-shadow-light);
+  font-size: 1rem;
+}
+
+.theme-option-btn.selected,
+.theme-option-btn:focus {
+  background: var(--sapphire-primary);
+  color: #fff;
+  border: 2px solid var(--sapphire-accent);
+  box-shadow: 0 2px 8px var(--sapphire-shadow-light);
+}
+
+.theme-option-btn:active {
+  background: var(--sapphire-secondary);
+  transform: scale(0.98);
+}
+
+/* === THEME OVERRIDES === */
+
+/* RUBY THEME */
+#booking-system.theme-ruby {
+  --sapphire-primary: var(--ruby-primary);
+  --sapphire-secondary: var(--ruby-secondary);
+  --sapphire-accent: var(--ruby-accent);
+  --sapphire-bg: var(--ruby-bg);
+  --sapphire-bg-dark: var(--ruby-bg-dark);
+  --sapphire-text: var(--ruby-text);
+  --sapphire-text-selected: var(--ruby-text-selected);
+  --sapphire-text-muted: var(--ruby-text-muted);
+  --sapphire-success: var(--ruby-success);
+  --sapphire-shadow: var(--ruby-shadow);
+  --sapphire-shadow-light: var(--ruby-shadow-light);
+}
+
+/* GOLD THEME */
+#booking-system.theme-gold {
+  --sapphire-primary: var(--gold-primary);
+  --sapphire-secondary: var(--gold-secondary);
+  --sapphire-accent: var(--gold-accent);
+  --sapphire-bg: var(--gold-bg);
+  --sapphire-bg-dark: var(--gold-bg-dark);
+  --sapphire-text: var(--gold-text);
+  --sapphire-text-selected: var(--gold-text-selected);
+  --sapphire-text-muted: var(--gold-text-muted);
+  --sapphire-success: var(--gold-success);
+  --sapphire-shadow: var(--gold-shadow);
+  --sapphire-shadow-light: var(--gold-shadow-light);
+}
+
+/* === RESPONSIVE DESIGN === */
+@media (max-width: 768px) {
+  #booking-system .wrap {
+    width: 98%;
+    padding: 18px 4vw 24px 4vw;
+    min-width: unset;
+  }
+  #calendar {
+    padding: 12px 4vw 16px 4vw;
+    font-size: 1rem;
+  }
+  .calendar-header {
+    flex-direction: row !important;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0;
+    font-size: 1rem;
+    padding: 0 10px;
+  }
+  .calendar-days-row,
+  .calendar-grid {
+    font-size: 0.95em;
+    gap: 2px;
+  }
+  .calendar-cell {
+    padding: 6px 0;
+    font-size: 0.98em;
+  }
+  .time-picker {
+    gap: 6px;
+  }
+  .time-slot-btn {
+    padding: 6px 10px;
+    font-size: 0.98rem;
+  }
+}
+
+@media (max-width: 500px) {
+  #calendar {
+    padding: 8px 2vw 10px 2vw;
+    font-size: 0.95rem;
+    min-width: 320px;
+    overflow-x: auto;
+  }
+  #days-checkboxes label {
+    width: 100%;
+  }
+  .time-picker {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .calendar-header {
+    flex-direction: row !important;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0;
+    font-size: 0.88em;
+    padding: 0 10px;
+  }
+  .calendar-nav {
+    font-size: 1.05rem;
+    padding: 2px 7px;
+  }
+  .calendar-month-year {
+    font-size: 1rem;
+  }
+  .calendar-days-row,
+  .calendar-grid {
+    min-width: 320px;
+    font-size: 0.92em;
+  }
+  .calendar-cell {
+    padding: 5px 0;
+    font-size: 0.95em;
+  }
+  .time-picker {
+    gap: 4px;
+  }
+  .time-slot-btn {
+    padding: 5px 7px;
+    font-size: 0.93rem;
+  }
+}
+
+@media (max-width: 360px) {
+  #calendar {
+    min-width: 260px;
+    width: 100%;
+    overflow-x: auto;
+  }
+  .calendar-header,
+  .calendar-days-row,
+  .calendar-grid {
+    min-width: 260px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+.admin-settings-toggle-wrap {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+.admin-settings-toggle {
+  width: 48px;
+  height: 28px;
+  background: var(--sapphire-bg-dark);
+  border: 2px solid var(--sapphire-primary);
+  border-radius: 16px;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s;
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+.admin-settings-toggle[aria-pressed="true"] {
+  border-color: var(--sapphire-success);
+}
+.toggle-slider {
+  position: absolute;
+  left: 20px;
+  top: 1.5px;
+  width: 20px;
+  height: 20px;
+  background: var(--sapphire-primary);
+  border-radius: 50%;
+  transition: left 0.25s cubic-bezier(.4,2,.6,1), background 0.2s;
+}
+.admin-settings-toggle[aria-pressed="false"] .toggle-slider {
+  left: 4px;
+  background: var(--sapphire-text-muted);
+}
+#admin-settings-panel {
+  max-height: 1200px;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(.4,2,.6,1), opacity 0.4s;
+  opacity: 1;
+}
+#admin-settings-panel.closed {
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none;
+}

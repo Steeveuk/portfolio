@@ -1,0 +1,85 @@
+/* Sure, I could use a preprocessor and optimize this css but... For a portfolio this size I think its fine */
+@media (max-width: 1000px) {
+  #about .flex {
+    flex-direction: column-reverse;
+  }
+  .flex {
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+  .container {
+    width: 90%;
+    margin: 0 auto;
+  }
+  .col {
+    width: 100% !important;
+  }
+  .col.end {
+    align-items: start !important;
+  }
+  #intro {
+    width: 100% !important;
+  }
+  .modal-close {
+    right: 0;
+  }
+  .glow-box-wrapper {
+    width: 100% !important;
+  }
+  .desktop {
+    display: none !important;
+  }
+  .mobile {
+    display: block !important;
+  }
+  #booking-system .col.end {
+    align-items: center !important;
+  }
+  #booking-system .project-info {
+    width: 100% !important;
+  }
+  .modal .flex {
+    gap: 20px;
+  }
+  .modal .col {
+    align-items: center !important;
+  }
+}
+
+@media (max-width: 500px) {
+  .code-box {
+    padding: 0 5%;
+    width: 100%;
+    /* max-height: 100vh; */
+    /* height: 500px !important; */
+    /* overflow: auto; */
+    white-space: pre;
+    min-width: 80vw;
+  }
+  #code-segment-2 {
+    margin-top: 40px;
+  }
+  #code-segment-1 .output-text {
+    margin-bottom: 40px;
+  }
+  .modal {
+    width: 95% !important;
+    padding: 20px 10px 0;
+  }
+  .shape-container {
+    opacity: 0.25;
+  }
+  .shiny-divider {
+    width: 10% !important;
+    border-radius: 10px !important;
+  }
+  .shiny-divider-points::before,
+  .shiny-divider-points::after {
+    opacity: 0;
+  }
+  html,
+  body {
+    overflow-x: hidden;
+  }
+}

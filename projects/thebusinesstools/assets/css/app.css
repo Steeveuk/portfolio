@@ -1,0 +1,453 @@
+/*--------------------------------------------------------------
+# DTR Styling
+--------------------------------------------------------------*/
+* {
+  box-sizing: border-box;
+}
+body {
+	background-color: #000;
+	font-family: "Alexandria", serif;
+	font-weight: 300;
+	margin: 0;
+}
+#page {
+	max-width: 1920px;
+	margin: 0 auto; 
+}
+header h1{
+	text-align: center;
+	color: #fff
+}
+
+input[type="submit"] {
+	background-color: #000;
+	color: #fff;
+	border: none;
+	padding: 10px 20px;
+	cursor: pointer;
+}
+
+input[type="submit"]:disabled {
+	background-color: #ccc;
+	color: #999;
+	cursor: not-allowed;
+}
+
+#wpadminbar a span{
+	color: #fff;
+}
+
+.section-black {
+	background-color: #000;
+	color: #fff;
+	padding: 30px 20px 100px;
+	text-align: center;
+	position: relative;
+	z-index: 1;
+}
+
+.diagonal-divider {
+	width: 100%;
+	height: 70px;
+	background-color: #fff;
+	transform: skewY(2deg);
+	transform-origin: top left;
+	margin-top: -50px;
+	z-index: 1;
+	position: relative;
+	top: 0px;
+}
+.diagonal-divider.bottom {
+	transform: skewY(-2deg);
+	margin-top: 0px;
+	margin-bottom: -50px;
+}
+
+.section-white {
+	background-color: #fff;
+	color: #000;
+	padding: 20px 20px 50px;
+	text-align: center;
+}
+.card-grid {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+.card {
+  position: relative;
+  width: 99%;
+  max-width: 480px;
+  min-width: 260px;
+  max-height: 220px;
+  background: #1f1f2e;
+  color: #fff;
+  box-sizing: border-box;
+  transition: width 0.6s ease, max-height 0.6s ease 0.3s, transform 0.6s ease;
+  overflow: hidden;
+  cursor: pointer;
+  text-align: center;
+  margin: 0 auto 12px auto;
+}
+.card:hover {
+	transform: scale(1.04);
+}
+.card-inner {
+  padding: 20px;
+}
+
+.card.expanded {
+	width: 49%;
+	max-height: 1000px;
+	cursor: default;
+}
+
+.card.expanded .bottom-right-h,
+.card.expanded .bottom-right-v {
+	opacity: 1;
+	transform: scale(1);
+}
+
+/* .card .card-content,
+.card .extra-content {
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	right: 20px;
+	bottom: 20px;
+	transition: opacity 0.6s ease, transform 0.6s ease;
+} */
+
+.card .card-content {
+	opacity: 1;
+	transform: translateY(0);
+	z-index: 2;
+	margin: 0 auto;
+	max-width: 260px;
+}
+
+.card.expanded .card-content {
+	opacity: 0;
+	transform: translateY(-10px);
+	pointer-events: none;
+	position: absolute;
+}
+
+.card .extra-content {
+	opacity: 0;
+	transform: translateY(10px);
+	z-index: 1;
+	color: #c5c5dd;
+}
+
+.card.expanded .extra-content {
+	opacity: 1;
+	transform: translateY(0);
+	z-index: 3;
+}
+
+.card h2 {
+	margin: 0 0 10px;
+	font-size: 24px;
+	color: #eaeaff;
+}
+
+.card p,
+.card p strong {
+	color: #eaeaff;
+	margin: 5px 0;
+	font-size: 14px;
+}
+.card .accordion p {
+	color: #333;
+}
+
+/* Fancy pointed corner lines */
+.card .corner-line {
+	position: absolute;
+	background: #fff;
+}
+
+.card .corner-line.h {
+	height: 2px;
+	width: 40px;
+	clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%);
+}
+
+.card .corner-line.v {
+	width: 2px;
+	height: 40px;
+	clip-path: polygon(0 0, 100% 5%, 100% 95%, 0% 100%);
+}
+
+.card .top-left-h { top: 0; left: 0; }
+.card .top-left-v { top: 0; left: 0; }
+
+.card .top-right-h { top: 0; right: 0; transform: scaleX(-1); }
+.card .top-right-v { top: 0; right: 0; }
+
+.card .bottom-left-h { bottom: 0; left: 0; transform: scaleY(-1); }
+.card .bottom-left-v { bottom: 0; left: 0; transform: scaleY(-1); }
+
+.card .bottom-right-h,
+.card .bottom-right-v {
+	bottom: 0;
+	right: 0;
+	opacity: 0;
+	transform: scale(0.5);
+	transition: opacity 0.6s ease, transform 0.6s ease;
+	transform-origin: bottom right;
+}
+
+.card:hover .bottom-right-h,
+.card:hover .bottom-right-v {
+	opacity: 1;
+	transform: scale(1);
+}
+
+/* Close button */
+.card .close-btn {
+	position: absolute;
+	top: 10px;
+	right: 15px;
+	font-size: 24px;
+	color: #aaa;
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+	z-index: 4;
+	pointer-events: none;
+}
+
+.card.expanded .close-btn {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+.card .close-btn:hover {
+	color: #fff;
+}
+
+.qr-code-placeholder {
+  border: 3px dashed #888;
+  margin: 0 auto;
+  width: 200px;
+  height: 200px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.qr-code-form {
+  text-align: center;
+}
+
+.qr-code-form input[type="url"] {
+  border-radius: 10px;
+  width: 100%;
+  padding: 5px 10px;
+}
+
+.home #section-1 p.generation-text {
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.qr-code {
+  text-align: center;
+}
+
+.qr-code img {
+  width: 100%;
+}
+
+.accordion {
+  width: 100%;
+  margin: 20px 0;
+}
+
+.accordion-content a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.accordion-content a.active {
+  background-color: #333;
+  color: #fff;
+}
+
+.accordion-content {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+}
+
+.accordion-content > div {
+  padding: 20px;
+}
+
+.sec {
+  display: none;
+}
+.sec.display {
+  display: block;
+}
+
+#landing {
+  display: block;
+}
+.card form {
+  max-width: 600px;
+  margin: 30px auto;
+}
+
+.card form ol {
+  list-style-type: decimal;
+  padding-left: 20px;
+	margin: 0;
+}
+
+.card form li {
+  margin-bottom: 20px;
+}
+
+.card form label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+	text-align: left;
+}
+
+.card form input,
+.card form textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.confirmation-message {
+  background-color: #d4edda;
+  padding: 15px;
+  border-left: 5px solid #28a745;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+.elegant-btn {
+  display: inline-block;
+  padding: 15px 20px;
+  background-color: transparent;
+  color: #fff;
+  border: 1px solid #fff;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  transition: all 0.3s ease;
+	margin: 10px 0;
+}
+
+.elegant-btn::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: -100%;
+  background: #fff;
+  z-index: 0;
+  transition: all 0.4s ease;
+}
+
+.elegant-btn:hover::after {
+  left: 0;
+}
+
+.elegant-btn:hover {
+  color: #000;
+}
+
+.elegant-btn span {
+  position: relative;
+  z-index: 1;
+}
+.elegant-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+#faq {
+	margin-top: 50px;
+}
+
+@keyframes rotate-icon {
+  0% {
+    transform: perspective(500px) rotateY(-42deg);
+  }
+  50% {
+    transform: perspective(500px) rotateY(42deg);
+  }
+  100% {
+    transform: perspective(500px) rotateY(-42deg);
+  }
+}
+@-webkit-keyframes animate-background {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@keyframes animate-background {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes rotate-button {
+  to {
+    --angle: 360deg;
+  }
+}
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.card, .card.expanded {
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.card-inner {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}

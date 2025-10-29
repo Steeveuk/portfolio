@@ -1,0 +1,158 @@
+/**
+ * card begin
+ */
+.cards.grid {
+	display: flex;
+	flex-wrap: wrap;
+	column-gap: 3.5%;
+}
+.cards.grid .component.card {
+	width: 31%;
+	height: 100%;
+}
+.cards.grid .component.card .accordion .content {
+	padding: 10px 10px 20px;
+	text-align: center;
+}
+.cards.grid .component.card .accordion .content .scan-me img {
+	margin: 0 auto;
+}
+.cards.grid .component.card .accordion .content .view-event {
+	padding: 10px;
+  margin: 20px auto 10px;
+  width: 60%;
+  font-size: 16px;
+  box-shadow: 0px 0px 3px #887cbd;
+}
+.cards.grid .component.card .accordion .content .view-event span {
+	font-size: 16px;
+	line-height: 20px;
+}
+.cards.grid .component.card .accordion .content > span {
+	font-size: 16px;
+}
+.cards.grid .component.card .accordion .content > span a.w3w {
+	margin-top: 10px;
+	color: #888;
+	text-decoration: underline;
+}
+.cards.grid .component.card .accordion .content > span strong {
+	font-size: 18px;
+}
+.cards.grid .component.card .accordion .content > span:last-child hr {
+	display: none;
+}
+.cards.grid .component.card .accordion .content > span {
+	margin-top: 10px;
+}
+.cards.grid .component.card .image {
+	margin-bottom: 0;
+}
+.cards.grid .component.card .image img {
+	max-height: 180px;
+}
+.component.card {
+	height: 100%;
+	text-align: left;
+	display: block;
+	box-shadow: 1px 5px 11px #ccc;
+	padding-bottom: 0px;
+	margin: 0 0 50px;
+	border-radius: 0 0 30px 30px;
+	transition: all 0.3s ease-in-out;
+	overflow: hidden;
+	position: relative;
+	background: #fff;
+}
+.component.card .inner {
+	padding: 0 20px;
+}
+.component.card .image img {
+	width: 100%;
+	object-fit: cover;
+	height: 100%;
+	transition: all 0.3s ease-in-out;
+	display: block;
+}
+.component.card span {
+	display: block;
+	text-wrap: auto;
+}
+.component.card h4.title {
+	margin: 15px 0 10px;
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 400;
+}
+.component.card .description {
+	font-size: 14px;
+  line-height: 26px;
+  font-weight: 300;
+  margin-bottom: 0px;
+}
+.component.card:hover {
+	box-shadow: 1px 5px 11px #999;
+}
+.component.card .image {
+	overflow: hidden;
+	box-shadow: 0 2px 2px #d4d4d4;
+}
+.component.card:hover .image img {
+	transform: scale(1.05);
+}
+.component.card.wide {
+	display: flex;
+	border-radius: 20px;
+}
+.component.card .information {
+	margin: 0;
+}
+.component.card .information > span {
+  font-size: 14px;
+  line-height: 20px;
+  margin: 7px 0;
+  font-weight: 200;
+}
+.component.card .tickets-available {
+	font-size: 16px;
+  line-height: 26px;
+  font-weight: 300;
+  margin-bottom: 0px;
+  margin-top: 15px;
+}
+.component.card .information > span.date-time,
+.component.card .information > span.coming-soon {
+	font-weight: 300;
+}
+.component.card .information > span.card-note {
+	font-weight: 400;
+}
+.component.card .information > button {
+	margin: 0;
+  display: block;
+}
+.component.card.wide .image {
+	width: 22%;
+  margin: 0;
+}
+.component.card.wide .inner {
+	display: flex;
+  width: 80%;
+  padding: 0;
+  margin: 0;
+}
+.component.card.accordion span {
+	margin: 0;
+}
+.component.card.accordion button {
+	width: 100%;
+	padding: 15px;
+	border-radius: 0;
+	cursor: pointer;
+}
+.component.card.accordion .tab.active button {
+	border-top: 0;
+}
+/**
+ * card end
+ */

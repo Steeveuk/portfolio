@@ -1,0 +1,168 @@
+.widget {
+	margin: 0;
+}
+
+/**
+ * card-listing begin
+ */
+.widget.card-listing a {
+	text-decoration: none;
+}
+.widget.card-listing .component.card .image img {
+	height: 200px;
+}
+.widget.card-listing .component.card.wide .image img {
+	height: 220px;
+}
+.widget.card-listing.latest-events .component.card.wide .title-description {
+	width: 60%;
+  margin: 0 60px 0 30px;
+}
+.widget.card-listing.latest-events .component.card.wide .information {
+	width: 32%;
+  padding-right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 19px;
+	text-align: right;
+}
+.widget.card-listing.latest-events .component.card.wide .information span {
+	margin: 2px 0;
+}
+.widget.card-listing.latest-events .component.card.wide {
+	border-radius: 0 0 30px 30px;
+}
+.widget.card-listing.latest-events .component.card.wide .button{
+	margin-top: 10px;
+  font-size: 20px;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 190px;
+}
+/**
+ * card-listing end
+ */
+
+/**
+ * carousel-slider begin
+ */
+.widget.carousel-slider a {
+	margin: 0 10px;
+	text-decoration: none;
+}
+.widget.carousel-slider .component.card .image img {
+	height: 500px;
+}
+/**
+ * carousel-slider end
+ */
+
+/**
+ * countdown-clock begin
+ */
+.widget.countdown-clock .countdown .clock {
+	position: relative;
+	height: 269px;
+  width: 269px;
+	display: block;
+  background-size: contain;
+}
+.widget.countdown-clock .countdown .clock,
+.widget.countdown-clock .countdown .clock img {
+	max-width: 269px;
+}
+.widget.countdown-clock .countdown .clock .inner {
+	display: flex;
+	height: 100%;
+	text-align: center;
+	justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+.widget.countdown-clock .countdown .clock span {
+	margin: 0;
+  line-height: 25px;
+  color: #3d3d3d;
+  font-weight: 400;
+}
+.widget.countdown-clock .countdown .clock span.separator {
+	margin: 0 7px;
+}
+.widget.countdown-clock .countdown .clock .label {
+	display: block;
+}
+/**
+ * countdown-clock end
+ /
+
+/**
+ * follow-us-instagram begin
+ */
+:not(.col-pad) .widget.follow-us-instagram {
+  margin: 0 auto 40px;
+}
+/**
+ * follow-us-instagram end
+ */
+
+ /**
+ * gradient-heading begin
+ */
+.widget.gradient-heading h3 {
+	text-transform: uppercase;
+}
+/**
+ * gradient-heading end
+ */
+
+/**
+ * gradient-button begin
+ */
+.widget.gradient-button {
+	margin: 50px auto 0;
+	width: 50%;
+}
+/**
+ * gradient-button end
+ */
+
+/**
+ * scrolling-ticker begin
+ */
+.widget.scrolling-ticker .ticker-viewport {
+	width: 100%;
+	overflow: hidden;
+	white-space: nowrap;
+	position: relative;
+}
+.widget.scrolling-ticker .ticker-container {
+	display: flex;
+	width: max-content;
+	position: relative;
+}
+.widget.scrolling-ticker .ticker-item {
+	text-align: center;
+	display: inline-block;
+	width: 400px;
+	box-sizing: border-box;
+	min-height: 200px;
+	margin-right: 20px;
+}
+.widget.scrolling-ticker .ticker-item .component.card {
+	height: calc(100% - 30px);
+}
+.widget.scrolling-ticker .ticker-item a {
+	text-decoration: none;
+	color: #333;
+}
+.widget.scrolling-ticker .ticker-item .card img {
+	height: 200px;
+}
+.widget.scrolling-ticker .ticker-item .card .description {
+	color: darkred;
+}
+/**
+ * scrolling-ticker end
+ */

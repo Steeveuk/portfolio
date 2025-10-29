@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ACF Reassignment Tool Showcase</title>
+  <link rel="stylesheet" href="assets/css/acf-reassignment-tool.css">
+  <link rel="stylesheet" href="assets/third-party/datatables.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+</head>
+<body>
+<div id="acf-reassignment-tool">
+  <div class="wrap">
+    <h1>ACF Reassignment Tool <small>Showcase</small></h1>
+    <div class="notice notice-info">
+      <p><strong>Debugging enabled:</strong> This is a static showcase. No data will be changed.</p>
+    </div>
+    <p>This tool demonstrates how you can re-assign data from one field to another within a selected post type using ACF.</p>
+    <p><span class="danger">This is a demo. In production, use with caution as it can overwrite data.</span></p>
+
+    <div class="test-suite">
+      <h2>Test Suite (Demo)</h2>
+      <p>
+        <span class="danger">Clicking the button below will:</span>
+        <ul class="danger">
+          <li>set the post type to "Posts"</li>
+          <li>set the ACF Field Group to "ACF Testing Fields"</li>
+          <li>loop through each target field containing the word "Source"
+            <ul>
+              <li>loop through each destination field containing the words "(field) T[x]"</li>
+            </ul>
+          </li>
+          <li>open the log on a new page for each test</li>
+        </ul>
+        <span class="danger">Please have exactly 2 posts ready with different data &amp; taxonomies in the source fields to test this tool.</span>
+      </p>
+      <button class="button button-secondary" disabled>Clear Test Data (demo only)</button>
+      <br><br>
+      <button class="button button-primary" disabled>Run Testing (demo only)</button>
+    </div>
+
+    <div class="progress-wrapper" data-progress style="display: none;">
+      <div class="inner">
+        <h2>Processing, keep this window open and active!</h2>
+        <p class="progress-amounts">Progress: <span class="amount" data-progress-amount>0</span> / <span class="total" data-progress-total>0</span></p>
+        <div class="progress-bar">
+          <span class="progress-bar-fill" style="width: 0%;" data-progress-bar></span>
+        </div>
+      </div>
+    </div>
+
+    <form action="#" method="post" data-reassignment-tool>
+      <input type="hidden" name="frmReassignTool" value="1">
+      <div class="row">
+        <div class="col col-100">
+          <div class="form-group">
+            <label for="fldPostType">Post Type</label>
+            <select name="fldPostType" required>
+              <option value="">Select post type</option>
+              <option value="post">Posts</option>
+              <option value="page">Pages</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-100">
+          <div class="form-group">
+            <label for="fldAcfFieldGroup">ACF Field Group</label>
+            <select name="fldAcfFieldGroup" required>
+              <option value="">Select ACF Field Group</option>
+              <option value="1">ACF Testing Fields</option>
+              <option value="2">Custom Fields Group</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label>Target Field</label>
+            <select name="fldTarget" required>
+              <option value="">Select Target Field</option>
+              <option value="source_field">Source Field</option>
+            </select>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label>Destination Field</label>
+            <select name="fldDestination" required>
+              <option value="">Select Destination Field</option>
+              <option value="destination_field">Destination Field</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row extended-options" style="display: none;">
+        <div class="col"></div>
+        <div class="col">
+          <div class="form-group">
+            <label>Destination Value Override (if the source field is not empty)</label>
+            <select name="fldDestinationValue" required>
+              <option value=""></option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <p class="submit">
+        <input type="submit" name="submit" id="submit" class="button button-primary" value="Replace values" disabled />
+      </p>
+    </form>
+
+    <div>
+      <h3>Logs (Demo)</h3>
+      <table class="dt wp-list-table widefat fixed striped posts">
+        <thead>
+          <tr>
+            <th style="width: 10%">Time</th>
+            <th style="width: 10%">Post Type</th>
+            <th style="width: 20%">Source Field</th>
+            <th style="width: 20%">Destination Field</th>
+            <th style="width: 40%">Log</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2025-06-01 12:00:00</td>
+            <td>post</td>
+            <td>Source Field</td>
+            <td>Destination Field</td>
+            <td>Updated 2 posts. All values matched.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div data-fields-handled-note>
+      <h3>Current Compatibility</h3>
+      <p>This tool can currently handle the following types of ACF fields:</p>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 30%;">Target Field</th>
+            <th>Destination Field(s)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>text</td><td>text, textarea</td></tr>
+          <tr><td>textarea</td><td>text, textarea</td></tr>
+          <tr><td>number</td><td>number</td></tr>
+          <tr><td>select</td><td>select, text, textarea</td></tr>
+          <tr><td>date_time_picker</td><td>date_time_picker</td></tr>
+          <tr><td>true_false</td><td>select (extended options: {"select_value":true})</td></tr>
+          <tr><td>taxonomy</td><td>taxonomy, select (extended options: {"select_value":true})</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="margin-top: 40px;">
+      <h2>Sample PHP Logic Taken From The Tool</h2>
+      <h4>Field Mapping Callback</h4>
+      <pre class="php-snippet line-numbers"><code class="language-php">function art_handle_acf_field_mapping_callback() {
+  // Check if the user is authorized
+  if (!current_user_can('manage_options')) {
+    wp_send_json_error('Unauthorized');
+  }
+
+  // Initialize the variables
+  $relationship           = sanitize_text_field($_POST['relationship'] ?? '');
+  $post_type              = sanitize_text_field($_POST['post_type'] ?? '');
+  $source_key_path        = art_sanitize_meta_value($_POST['source_key_path'] ?? []);
+  $source_name_path       = art_sanitize_meta_value($_POST['source_name_path'] ?? []);
+  $destination_key_path   = art_sanitize_meta_value($_POST['destination_key_path'] ?? []);
+  $destination_name_path  = art_sanitize_meta_value($_POST['destination_name_path'] ?? []);
+  $destination_override   = isset($_POST['destination_override_value']) 
+    ? sanitize_text_field($_POST['destination_override_value']) 
+    : null;
+
+  $offset = intval($_POST['post_offset'] ?? 0);
+  $limit = ACF_REASSIGNMENT_POST_CHUNKING_AMOUNT;
+
+  // Get the posts
+  $posts = get_posts([
+    'post_type'      => $post_type,
+    'posts_per_page' => $limit,
+    'offset'         => $offset,
+    'post_status'    => 'any'
+  ]);
+
+  // Initialize the log
+  $log = [];
+
+  foreach($posts as $post){
+    // Get the source value
+    $source_value = get_field($source_key_path[0], $post->ID);
+    if(empty($source_value)) continue;
+
+    // Setting the source value
+    if(!empty($destination_override)){
+      // If there is a destination override, use it
+      $new_source_value = $destination_override;
+    } else if(count($source_name_path) > 1 && is_array($source_value)){
+      // If the source value is an array, loop through the source name path and set the new source value
+      $new_source_value = [];
+      foreach($source_name_path as $key){
+        if(empty($new_source_value) && array_key_exists($key, $source_value)){
+          $new_source_value = $source_value[$key];
+        } elseif(is_array($new_source_value) && array_key_exists($key, $new_source_value)){
+          $new_source_value = $new_source_value[$key];
+        }
+      }
+    } else {
+      // Set the new source value
+      $new_source_value = $source_value;
+    }
+
+    // Setting the destination value and updating the field
+    if(count($destination_name_path) > 1){
+      // Get the current destination value
+      $current_destination_value = get_field($destination_key_path[0], $post->ID);
+      
+      // Remove the root key for the update path
+      $update_path = array_slice($destination_name_path, 1);
+
+      // Set the new value in the nested array
+      art_set_nested_array_value($current_destination_value, $update_path, $new_source_value);
+
+      // Update the field
+      update_field($destination_key_path[0], $current_destination_value, $post->ID);
+    } else {
+      // Update the field
+      update_field($destination_key_path[0], $new_source_value, $post->ID);
+    }
+
+    // Log
+    $log[$post->ID] = [
+      'updated_value' => $new_source_value,
+    ];
+  }
+
+  // Log the update
+  art_log_acf_field_update([
+    'post_type'             => $post_type,
+    'relationship'          => $relationship,
+    'source_field_name'     => implode(' > ', $source_name_path),
+    'destination_field_name'=> implode(' > ', $destination_name_path),
+    'log'                   => $log
+  ]);
+
+  // Send the success response
+  wp_send_json_success('Successfully run reassignment tool. Refresh the page and see the log area for more details.');
+}
+</code></pre>
+      <h4>Helper Utility Function</h4>
+      <pre class="php-snippet line-numbers"><code class="language-php">function art_set_nested_array_value(&$array, $keys, $value) {
+  if (empty($keys)) return;
+  // Reference the array
+  $ref = &$array;
+
+  // Loop through the keys and set the value
+  foreach (array_slice($keys, 0, -1) as $k) {
+    // If the key does not exist, create an empty array
+    if (!isset($ref[$k]) || !is_array($ref[$k])) {
+      $ref[$k] = [];
+    }
+
+    // Re-reference the array one level deeper
+    $ref = &$ref[$k];
+  }
+
+  // Set the value
+  $ref[end($keys)] = $value;
+}
+</code></pre>
+      <h4>Logging Updates</h4>
+      <pre class="php-snippet line-numbers"><code class="language-php">function art_log_acf_field_update($log_entry) {
+  // Get the log file
+  $log_file = plugin_dir_path(__FILE__) . 'assets/acf-update-log.json';
+  $log = file_exists($log_file) ? json_decode(file_get_contents($log_file), true) : [];
+
+  // Add new entry at the beginning
+  array_unshift($log, [
+    'time' => current_time('mysql'),
+    'post_type' => $log_entry['post_type'],
+    'relationship' => $log_entry['relationship'],
+    'source_field' => $log_entry['source_field_name'],
+    'destination_field' => $log_entry['destination_field_name'],
+    'log' => $log_entry['log']
+  ]);
+
+  // Limit the log to 200 entries
+  $log = array_slice($log, 0, 200);
+  file_put_contents($log_file, json_encode($log, JSON_PRETTY_PRINT));
+}
+</code></pre>
+    </div>
+  </div>
+</div>
+<script src="assets/third-party/datatables.min.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-markup-templating.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-php.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script>
+  // Initialize DataTables for the logs table
+  document.addEventListener('DOMContentLoaded', function() {
+    if (window.jQuery && window.jQuery.fn.DataTable) {
+      window.jQuery('table.dt').DataTable({
+        "order": [[ 0, "desc" ]],
+      });
+    }
+  });
+</script>
+</body>
+</html> 
