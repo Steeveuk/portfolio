@@ -82,9 +82,11 @@ footer {
   overflow: hidden;
   border-radius: 10px;
   background: #1e1e1e;
+  contain: layout style paint;
 }
 #game-container canvas,
 #crossbow-game-container canvas {
+  display: block;
   width: 100%;
   height: 100%;
   cursor: crosshair;
@@ -605,7 +607,7 @@ footer {
   position: relative;
   width: 80%;
   margin: 30px auto;
-  transition: all 0.3s ease;
+  transition: transform 0.2s ease-out;
   left: 0;
   top: 0;
 }

@@ -1,6 +1,6 @@
 // Crossbow Game Module
 const crossbow_game = {
-  canvas: document.getElementById('crossbow_game_canvas'),
+  canvas: document.getElementById("crossbow_game_canvas"),
   ctx: null,
   width: 0,
   height: 0,
@@ -46,8 +46,8 @@ const crossbow_game = {
 
       // --- Draw central body (vertical, thick) ---
       ctx.save();
-      ctx.fillStyle = '#a86b32';
-      ctx.strokeStyle = '#8B5A2B';
+      ctx.fillStyle = "#a86b32";
+      ctx.strokeStyle = "#8B5A2B";
       ctx.lineWidth = 8;
       ctx.beginPath();
       ctx.moveTo(-8, -38);
@@ -61,7 +61,7 @@ const crossbow_game = {
 
       // --- Draw curved arms (Bezier curves) ---
       ctx.save();
-      ctx.strokeStyle = '#c89b6e';
+      ctx.strokeStyle = "#c89b6e";
       ctx.lineWidth = 10;
       ctx.beginPath();
       // Left arm
@@ -75,7 +75,7 @@ const crossbow_game = {
 
       // --- Draw yellow guard (V shape) ---
       ctx.save();
-      ctx.fillStyle = '#ffe066';
+      ctx.fillStyle = "#ffe066";
       ctx.beginPath();
       ctx.moveTo(-18, 0);
       ctx.lineTo(0, 18);
@@ -88,14 +88,14 @@ const crossbow_game = {
       // --- Draw arrow/bolt (vertical, with tip) ---
       ctx.save();
       // Shaft
-      ctx.strokeStyle = '#7c4a03';
+      ctx.strokeStyle = "#7c4a03";
       ctx.lineWidth = 4;
       ctx.beginPath();
       ctx.moveTo(0, -38);
       ctx.lineTo(0, -60);
       ctx.stroke();
       // Tip
-      ctx.fillStyle = '#bfc9ca';
+      ctx.fillStyle = "#bfc9ca";
       ctx.beginPath();
       ctx.moveTo(0, -68);
       ctx.lineTo(-7, -60);
@@ -106,7 +106,7 @@ const crossbow_game = {
 
       // --- Draw string ---
       ctx.save();
-      ctx.strokeStyle = '#b6a77a';
+      ctx.strokeStyle = "#b6a77a";
       ctx.lineWidth = 3;
       ctx.beginPath();
       // Arm tips (match Bezier end points)
@@ -131,13 +131,18 @@ const crossbow_game = {
       const gauge_x = this.x - gauge_w / 2;
       const gauge_y = this.y + 50;
       ctx.save();
-      ctx.strokeStyle = '#8B5A2B';
+      ctx.strokeStyle = "#8B5A2B";
       ctx.lineWidth = 2;
       ctx.strokeRect(gauge_x, gauge_y, gauge_w, gauge_h);
-      ctx.fillStyle = '#8B5A2B';
-      ctx.fillRect(gauge_x, gauge_y, gauge_w * crossbow_game.reload.gauge, gauge_h);
+      ctx.fillStyle = "#8B5A2B";
+      ctx.fillRect(
+        gauge_x,
+        gauge_y,
+        gauge_w * crossbow_game.reload.gauge,
+        gauge_h
+      );
       ctx.restore();
-      
+
       // --- Draw power gauge (below reload gauge, not rotated) - only on desktop ---
       if (!crossbow_game.mobile) {
         const power_w = 50;
@@ -145,23 +150,23 @@ const crossbow_game = {
         const power_x = this.x - power_w / 2;
         const power_y = gauge_y + gauge_h + 6;
         ctx.save();
-        ctx.strokeStyle = '#0af';
+        ctx.strokeStyle = "#0af";
         ctx.lineWidth = 2;
         ctx.strokeRect(power_x, power_y, power_w, power_h);
-        ctx.fillStyle = '#0af';
+        ctx.fillStyle = "#0af";
         ctx.fillRect(power_x, power_y, power_w * crossbow_game.power, power_h);
         ctx.restore();
       }
-    }
+    },
   },
 
   create_target() {
     // Randomly spawn at top or left edge
-    const edge = Math.random() < 0.5 ? 'top' : 'left';
+    const edge = Math.random() < 0.5 ? "top" : "left";
     let x, y, vx, vy;
     // Smaller targets for mobile
     const r = this.mobile ? 12 : 18;
-    if (edge === 'top') {
+    if (edge === "top") {
       x = Math.random() * (this.width - 2 * r) + r;
       y = -r;
       vx = (Math.random() - 0.5) * 2;
@@ -176,11 +181,11 @@ const crossbow_game = {
   },
 
   draw_targets() {
-    this.targets.forEach(t => {
-      const colors = ['#fff', '#0af', '#f33', '#fa0'];
+    this.targets.forEach((t) => {
+      const colors = ["#fff", "#0af", "#f33", "#fa0"];
       for (let i = colors.length - 1; i >= 0; i--) {
         this.ctx.beginPath();
-        this.ctx.arc(t.x, t.y, t.r * (i + 1) / colors.length, 0, Math.PI * 2);
+        this.ctx.arc(t.x, t.y, (t.r * (i + 1)) / colors.length, 0, Math.PI * 2);
         this.ctx.fillStyle = colors[i];
         this.ctx.fill();
       }
@@ -189,9 +194,9 @@ const crossbow_game = {
 
   draw_bolts() {
     this.ctx.save();
-    this.ctx.strokeStyle = '#ccc';
+    this.ctx.strokeStyle = "#ccc";
     this.ctx.lineWidth = 4;
-    this.bolts.forEach(b => {
+    this.bolts.forEach((b) => {
       this.ctx.beginPath();
       this.ctx.moveTo(b.x, b.y);
       // Draw bolt as a line in its velocity direction
@@ -202,96 +207,93 @@ const crossbow_game = {
       // Draw tip
       this.ctx.beginPath();
       this.ctx.arc(b.x, b.y, 4, 0, Math.PI * 2);
-      this.ctx.fillStyle = '#f33';
+      this.ctx.fillStyle = "#f33";
       this.ctx.fill();
     });
     this.ctx.restore();
   },
 
   update_bolts() {
-    this.bolts.forEach(b => {
+    let hitEdge = false;
+    let edgeDirection = { x: 0, y: 0 };
+
+    for (let i = this.bolts.length - 1; i >= 0; i--) {
+      const b = this.bolts[i];
       b.x += b.vx;
       b.y += b.vy;
       b.vy += this.gravity;
-    });
-    // Remove bolts out of bounds
-    const before = this.bolts.length;
-    // Nudge effect for out-of-bounds
-    let timeout_speed = 200;
-    this.bolts.forEach(b => {
-      if (b.x < 0) {
-        this.canvas_movement.x -= 10;
-        jQuery('#hover-area-crossbow').css('left', `${this.canvas_movement.x}px`);
-        if (this.canvas_movement.x > -30) {
-          clearTimeout(this.canvas_movement.timer);
+
+      // Check bounds and remove
+      if (b.x < 0 || b.x > this.width || b.y < 0 || b.y > this.height) {
+        // Determine edge hit direction (only once per frame)
+        if (!hitEdge) {
+          if (b.x < 0) edgeDirection.x = -10;
+          else if (b.x > this.width) edgeDirection.x = 10;
+          if (b.y < 0) edgeDirection.y = -10;
+          else if (b.y > this.height) edgeDirection.y = 10;
+          hitEdge = true;
         }
-        this.canvas_movement.timer = setTimeout(() => {
-          jQuery('#hover-area-crossbow').css('left', '0');
-          jQuery('#hover-area-crossbow').css('top', '0');
-          this.canvas_movement.x = 0;
-        }, timeout_speed);
-      } else if (b.x > this.width) {
-        this.canvas_movement.x += 10;
-        jQuery('#hover-area-crossbow').css('left', `${this.canvas_movement.x}px`);
-        if (this.canvas_movement.x < 30) {
-          clearTimeout(this.canvas_movement.timer);
-        }
-        this.canvas_movement.timer = setTimeout(() => {
-          jQuery('#hover-area-crossbow').css('left', '0');
-          jQuery('#hover-area-crossbow').css('top', '0');
-          this.canvas_movement.x = 0;
-        }, timeout_speed);
-      } else if (b.y < 0) {
-        this.canvas_movement.y -= 10;
-        jQuery('#hover-area-crossbow').css('top', `${this.canvas_movement.y}px`);
-        if (this.canvas_movement.y > -30) {
-          clearTimeout(this.canvas_movement.timer);
-        }
-        this.canvas_movement.timer = setTimeout(() => {
-          jQuery('#hover-area-crossbow').css('top', '0');
-          jQuery('#hover-area-crossbow').css('left', '0');
-          this.canvas_movement.y = 0;
-        }, timeout_speed);
-      } else if (b.y > this.height) {
-        this.canvas_movement.y += 10;
-        jQuery('#hover-area-crossbow').css('top', `${this.canvas_movement.y}px`);
-        if (this.canvas_movement.y < 30) {
-          clearTimeout(this.canvas_movement.timer);
-        }
-        this.canvas_movement.timer = setTimeout(() => {
-          jQuery('#hover-area-crossbow').css('top', '0');
-          jQuery('#hover-area-crossbow').css('left', '0');
-          this.canvas_movement.y = 0;
-        }, timeout_speed);
+        this.bolts.splice(i, 1);
+        this.missed++;
       }
-    });
-    this.bolts = this.bolts.filter(b => b.x > 0 && b.x < this.width && b.y > 0 && b.y < this.height);
-    const missed = before - this.bolts.length;
-    if (missed > 0) this.missed += missed;
+    }
+
+    // Trigger shake effect only when edge is hit (not every frame)
+    if (hitEdge) {
+      this.triggerShake(edgeDirection);
+    }
+  },
+
+  triggerShake(direction) {
+    const hoverArea = document.getElementById("hover-area-crossbow");
+    if (!hoverArea) return;
+
+    this.canvas_movement.x += direction.x;
+    this.canvas_movement.y += direction.y;
+
+    hoverArea.style.transform = `translate(${this.canvas_movement.x}px, ${this.canvas_movement.y}px)`;
+
+    clearTimeout(this.canvas_movement.timer);
+    this.canvas_movement.timer = setTimeout(() => {
+      hoverArea.style.transform = "translate(0, 0)";
+      this.canvas_movement.x = 0;
+      this.canvas_movement.y = 0;
+    }, 200);
   },
 
   update_targets() {
-    this.targets.forEach(t => {
+    this.targets.forEach((t) => {
       t.x += t.vx;
       t.y += t.vy;
     });
     // Remove targets out of bounds
-    this.targets = this.targets.filter(t => t.x > -30 && t.x < this.width + 30 && t.y > -30 && t.y < this.height + 30);
+    this.targets = this.targets.filter(
+      (t) =>
+        t.x > -30 &&
+        t.x < this.width + 30 &&
+        t.y > -30 &&
+        t.y < this.height + 30
+    );
   },
 
   detect_hits() {
-    this.bolts.forEach((b, bi) => {
-      this.targets.forEach((t, ti) => {
+    for (let bi = this.bolts.length - 1; bi >= 0; bi--) {
+      const b = this.bolts[bi];
+      for (let ti = this.targets.length - 1; ti >= 0; ti--) {
+        const t = this.targets[ti];
         const dx = b.x - t.x;
         const dy = b.y - t.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < t.r + 4) {
+        const hitRadius = (t.r + 4) * (t.r + 4); // Square for faster comparison
+        const distSquared = dx * dx + dy * dy;
+
+        if (distSquared < hitRadius) {
           this.bolts.splice(bi, 1);
           this.targets.splice(ti, 1);
           this.score++;
+          break; // Move to next bolt after hit
         }
-      });
-    });
+      }
+    }
   },
 
   game_loop() {
@@ -319,9 +321,9 @@ const crossbow_game = {
     this.draw_bolts();
     this.draw_targets();
     // UI
-    this.ctx.font = '16px Arial';
-    this.ctx.fillStyle = '#fff';
-    this.ctx.textAlign = 'left';
+    this.ctx.font = "16px Arial";
+    this.ctx.fillStyle = "#fff";
+    this.ctx.textAlign = "left";
     this.ctx.fillText(`Score: ${this.score}`, 20, this.height - 36);
     this.ctx.fillText(`Missed: ${this.missed}`, 20, this.height - 16);
     requestAnimationFrame(() => this.game_loop());
@@ -339,28 +341,37 @@ const crossbow_game = {
   },
 
   init() {
-    this.ctx = this.canvas.getContext('2d');
+    this.ctx = this.canvas.getContext("2d", { alpha: false });
     this.width = this.canvas.offsetWidth;
     this.height = this.canvas.offsetHeight;
     this.canvas.width = this.width;
     this.canvas.height = this.height;
-    
+
     // Check if mobile (screen width < 500px)
     this.mobile = this.width < 500;
-    
-    // Crossbow position
-    this.crossbow.x = this.width - 60;
-    this.crossbow.y = this.height - 80;
+
+    // Crossbow position based on screen size
+    if (this.mobile) {
+      this.crossbow.x = this.width / 2;
+      this.crossbow.y = this.height - 80;
+    } else {
+      this.crossbow.x = this.width - 60;
+      this.crossbow.y = this.height - 80;
+    }
     // Mouse tracking
     this.mouse.x = this.crossbow.x;
     this.mouse.y = this.crossbow.y - 100;
-    this.canvas.addEventListener('mousemove', e => {
-      const rect = this.canvas.getBoundingClientRect();
-      this.mouse.x = e.clientX - rect.left;
-      this.mouse.y = e.clientY - rect.top;
-    });
+    this.canvas.addEventListener(
+      "mousemove",
+      (e) => {
+        const rect = this.canvas.getBoundingClientRect();
+        this.mouse.x = e.clientX - rect.left;
+        this.mouse.y = e.clientY - rect.top;
+      },
+      { passive: true }
+    );
     // Power gauge logic
-    this.canvas.addEventListener('mousedown', e => {
+    this.canvas.addEventListener("mousedown", (e) => {
       if (this.mobile) {
         // On mobile, power is always at max
         this.power = this.powerMax;
@@ -370,12 +381,12 @@ const crossbow_game = {
         this.power = this.powerMin;
       }
     });
-    this.canvas.addEventListener('mouseup', e => {
+    this.canvas.addEventListener("mouseup", (e) => {
       if (!this.reload.ready) return;
-      
+
       // On mobile, power is always at max, so no need to check powerCharging
       if (!this.mobile && !this.powerCharging) return;
-      
+
       this.reload.ready = false;
       this.reload.last = Date.now();
       this.reload.gauge = 0;
@@ -396,43 +407,68 @@ const crossbow_game = {
         x: this.crossbow.x,
         y: this.crossbow.y,
         vx: vx,
-        vy: vy
+        vy: vy,
       });
       this.power = 0;
     });
     // Prevent accidental firing on mouseleave
-    this.canvas.addEventListener('mouseleave', e => {
-      this.powerCharging = false;
-      this.power = 0;
-    });
-    window.addEventListener('resize', () => {
-      this.width = this.canvas.offsetWidth;
-      this.height = this.canvas.offsetHeight;
-      this.canvas.width = this.width;
-      this.canvas.height = this.height;
-      
-      // Update mobile detection on resize
-      this.mobile = this.width < 500;
-      
-      this.crossbow.x = this.width - 60;
-      this.crossbow.y = this.height - 120;
-    });
+    this.canvas.addEventListener(
+      "mouseleave",
+      (e) => {
+        this.powerCharging = false;
+        this.power = 0;
+      },
+      { passive: true }
+    );
+
+    // Debounced resize handler
+    let resizeTimeout;
+    window.addEventListener(
+      "resize",
+      () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+          this.width = this.canvas.offsetWidth;
+          this.height = this.canvas.offsetHeight;
+          this.canvas.width = this.width;
+          this.canvas.height = this.height;
+
+          // Update mobile detection on resize
+          this.mobile = this.width < 500;
+
+          // Position crossbow based on screen size
+          if (this.mobile) {
+            this.crossbow.x = this.width / 2;
+            this.crossbow.y = this.height - 80;
+          } else {
+            this.crossbow.x = this.width - 60;
+            this.crossbow.y = this.height - 120;
+          }
+        }, 100);
+      },
+      { passive: true }
+    );
     setInterval(() => {
       if (this.running) this.create_target();
     }, 1200);
-  }
+  },
 };
 crossbow_game.init();
 
-const crossbow_game_observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      console.info('Play Crossbow Game');
-      crossbow_game.play();
-    } else {
-      console.info('Pause Crossbow Game');
-      crossbow_game.pause();
-    }
-  });
-}, { threshold: 0.25 });
-crossbow_game_observer.observe(document.getElementById('crossbow-game-container'));
+const crossbow_game_observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        console.info("Play Crossbow Game");
+        crossbow_game.play();
+      } else {
+        console.info("Pause Crossbow Game");
+        crossbow_game.pause();
+      }
+    });
+  },
+  { threshold: 0.25 }
+);
+crossbow_game_observer.observe(
+  document.getElementById("crossbow-game-container")
+);

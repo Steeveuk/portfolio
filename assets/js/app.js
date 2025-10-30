@@ -15,6 +15,7 @@ jQuery(document).ready(function ($) {
   setup_iframe_source();
   setup_video_autoplay();
   setup_ajax_form();
+  update_year();
 });
 
 //!!! Functions
@@ -160,10 +161,12 @@ function scroll_to_element($el, offset = 0, duration = 600) {
 
 function setup_scroll_spy() {
   const $nav_links = $("nav a[data-scroll-to]");
-  const offset_tolerance = 100; // Adjust if you want the active to change earlier/later
+  const offset_tolerance = 200; // Increased to activate sections sooner
 
   function on_scroll() {
     const scroll_pos = $(window).scrollTop();
+    const window_height = $(window).height();
+    const document_height = $(document).height();
 
     let current_section_id = null;
 
@@ -176,9 +179,20 @@ function setup_scroll_spy() {
         const top = $target.offset().top - offset_tolerance;
         const bottom = top + $target.outerHeight();
 
-        if (scroll_pos >= top && scroll_pos < bottom) {
-          current_section_id = target_id;
-          return false; // break the each loop
+        // Special handling for the last section (contact)
+        if (target_id === "#contact") {
+          // If we're near the bottom of the page, activate contact section
+          const near_bottom =
+            scroll_pos + window_height >= document_height - 100;
+          if (near_bottom || (scroll_pos >= top && scroll_pos < bottom)) {
+            current_section_id = target_id;
+            return false; // break the each loop
+          }
+        } else {
+          if (scroll_pos >= top && scroll_pos < bottom) {
+            current_section_id = target_id;
+            return false; // break the each loop
+          }
         }
       }
     });
@@ -327,4 +341,9 @@ function setup_ajax_form() {
       },
     });
   });
+}
+
+function update_year() {
+  const currentYear = new Date().getFullYear();
+  $("#year").text(currentYear);
 }

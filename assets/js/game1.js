@@ -1,6 +1,6 @@
 // Stick Figure Game Module
 const stick_figure_game = {
-  canvas: document.getElementById('stick_figure_game_canvas'),
+  canvas: document.getElementById("stick_figure_game_canvas"),
   canvas_movement: { x: 0, y: 0, timer: null },
   ctx: null,
   width: 0,
@@ -31,7 +31,7 @@ const stick_figure_game = {
     gun_stock: 20,
     draw() {
       const ctx = stick_figure_game.ctx;
-      ctx.strokeStyle = '#fff';
+      ctx.strokeStyle = "#fff";
       ctx.lineWidth = 2;
 
       // Head
@@ -61,7 +61,7 @@ const stick_figure_game = {
 
       // Draw gun barrel (grey)
       ctx.save();
-      ctx.strokeStyle = '#888';
+      ctx.strokeStyle = "#888";
       ctx.lineWidth = 7;
       ctx.beginPath();
       ctx.moveTo(this.x, this.y - 50); // shoulder
@@ -71,7 +71,7 @@ const stick_figure_game = {
 
       // Draw gun stock (brown)
       ctx.save();
-      ctx.strokeStyle = '#8B5A2B';
+      ctx.strokeStyle = "#8B5A2B";
       ctx.lineWidth = 10;
       ctx.beginPath();
       ctx.moveTo(this.x, this.y - 50); // shoulder
@@ -85,11 +85,16 @@ const stick_figure_game = {
       const gauge_x = this.x - gauge_w / 2;
       const gauge_y = this.y + this.leg_length + 15;
       ctx.save();
-      ctx.strokeStyle = '#8B5A2B';
+      ctx.strokeStyle = "#8B5A2B";
       ctx.lineWidth = 2;
       ctx.strokeRect(gauge_x, gauge_y, gauge_w, gauge_h);
-      ctx.fillStyle = '#8B5A2B';
-      ctx.fillRect(gauge_x, gauge_y, gauge_w * stick_figure_game.reload.gauge, gauge_h);
+      ctx.fillStyle = "#8B5A2B";
+      ctx.fillRect(
+        gauge_x,
+        gauge_y,
+        gauge_w * stick_figure_game.reload.gauge,
+        gauge_h
+      );
       ctx.restore();
 
       // Legs
@@ -104,22 +109,27 @@ const stick_figure_game = {
       ctx.stroke();
 
       // Output targets_destroyed and missed_shots (bottom left)
-      ctx.font = '16px Arial';
-      ctx.fillStyle = '#fff';
-      ctx.textAlign = 'left';
+      ctx.font = "16px Arial";
+      ctx.fillStyle = "#fff";
+      ctx.textAlign = "left";
       const y1 = stick_figure_game.height - 36;
       const y2 = stick_figure_game.height - 16;
       ctx.fillText(`Score: ${stick_figure_game.targets_destroyed}`, 20, y1);
       ctx.fillText(`Missed: ${stick_figure_game.missed_shots}`, 20, y2);
     },
     update() {
-      if (stick_figure_game.keys['a'] && this.x > 20) this.x -= this.speed;
-      if (stick_figure_game.keys['d'] && this.x < stick_figure_game.width - 20) this.x += this.speed;
-      const moving = stick_figure_game.keys['w'] || stick_figure_game.keys['a'] || stick_figure_game.keys['s'] || stick_figure_game.keys['d'];
+      if (stick_figure_game.keys["a"] && this.x > 20) this.x -= this.speed;
+      if (stick_figure_game.keys["d"] && this.x < stick_figure_game.width - 20)
+        this.x += this.speed;
+      const moving =
+        stick_figure_game.keys["w"] ||
+        stick_figure_game.keys["a"] ||
+        stick_figure_game.keys["s"] ||
+        stick_figure_game.keys["d"];
       if (moving) {
         this.leg_phase += 0.2;
       }
-    }
+    },
   },
 
   create_target() {
@@ -140,16 +150,25 @@ const stick_figure_game = {
     const base_y = Math.random() * (this.height / 3) + 30;
     const amplitude = 40 + Math.random() * 30; // curve height
     const freq = 0.012 + Math.random() * 0.008; // curve frequency
-    this.clay_target = { x, y: base_y, r, vx, base_y, amplitude, freq, phase: 0 };
+    this.clay_target = {
+      x,
+      y: base_y,
+      r,
+      vx,
+      base_y,
+      amplitude,
+      freq,
+      phase: 0,
+    };
   },
 
   draw_targets() {
     if (this.clay_target) {
       const t = this.clay_target;
-      const colors = ['white', 'blue', 'red', 'orange'];
+      const colors = ["white", "blue", "red", "orange"];
       for (let i = colors.length - 1; i >= 0; i--) {
         this.ctx.beginPath();
-        this.ctx.arc(t.x, t.y, t.r * (i + 1) / colors.length, 0, Math.PI * 2);
+        this.ctx.arc(t.x, t.y, (t.r * (i + 1)) / colors.length, 0, Math.PI * 2);
         this.ctx.fillStyle = colors[i];
         this.ctx.fill();
       }
@@ -157,8 +176,8 @@ const stick_figure_game = {
   },
 
   draw_bullets() {
-    this.ctx.fillStyle = 'white';
-    this.bullets.forEach(b => {
+    this.ctx.fillStyle = "white";
+    this.bullets.forEach((b) => {
       this.ctx.beginPath();
       this.ctx.arc(b.x, b.y, 5, 0, Math.PI * 2);
       this.ctx.fill();
@@ -166,73 +185,63 @@ const stick_figure_game = {
   },
 
   update_bullets() {
-    this.bullets.forEach((b, index) => {
+    let hitEdge = false;
+    let edgeDirection = { x: 0, y: 0 };
+
+    for (let i = this.bullets.length - 1; i >= 0; i--) {
+      const b = this.bullets[i];
       b.x += b.vx;
       b.y += b.vy;
 
-      //Check which edge was hit and reset position
-      let timeout_speed = 200;
-      if (b.x < 0) {
-        this.canvas_movement.x -= 10;
-        jQuery('#hover-area').css('left', `${this.canvas_movement.x}px`);
-        if(this.canvas_movement.x > -30){
-          clearTimeout(this.canvas_movement.timer);
+      // Check bounds and remove
+      if (b.x < 0 || b.x > this.width || b.y < 0 || b.y > this.height) {
+        // Determine edge hit direction (only once per frame)
+        if (!hitEdge) {
+          if (b.x < 0) edgeDirection.x = -10;
+          else if (b.x > this.width) edgeDirection.x = 10;
+          if (b.y < 0) edgeDirection.y = -10;
+          else if (b.y > this.height) edgeDirection.y = 10;
+          hitEdge = true;
         }
-        this.canvas_movement.timer = setTimeout(() => {
-          jQuery('#hover-area').css('left', '0');
-          jQuery('#hover-area').css('top', '0');
-          this.canvas_movement.x = 0;
-        }, timeout_speed);
-      } else if(b.x > this.width) {
-        this.canvas_movement.x += 10;
-        jQuery('#hover-area').css('left', `${this.canvas_movement.x}px`);
-        if(this.canvas_movement.x < 30){
-          clearTimeout(this.canvas_movement.timer);
-        }
-        this.canvas_movement.timer = setTimeout(() => {
-          jQuery('#hover-area').css('left', '0');
-          jQuery('#hover-area').css('top', '0');
-          this.canvas_movement.x = 0;
-        }, timeout_speed);
-      } else if(b.y < 0) {
-        this.canvas_movement.y -= 10;
-        jQuery('#hover-area').css('top', `${this.canvas_movement.y}px`);
-        if(this.canvas_movement.y > -30){
-          clearTimeout(this.canvas_movement.timer);
-        }
-        this.canvas_movement.timer = setTimeout(() => {
-          jQuery('#hover-area').css('top', '0');
-          jQuery('#hover-area').css('top', '0');
-          this.canvas_movement.y = 0;
-        }, timeout_speed);
-      } else if(b.y > this.height) {
-        this.canvas_movement.y += 10;
-        jQuery('#hover-area').css('top', `${this.canvas_movement.y}px`);
-        if(this.canvas_movement.y < 30){
-          clearTimeout(this.canvas_movement.timer);
-        }
-        this.canvas_movement.timer = setTimeout(() => {
-          jQuery('#hover-area').css('top', '0');
-          jQuery('#hover-area').css('top', '0');
-          this.canvas_movement.y = 0;
-        }, timeout_speed);
+        this.bullets.splice(i, 1);
+        this.missed_shots++;
       }
-    });
-    // Count missed shots
-    const before = this.bullets.length;
-    this.bullets = this.bullets.filter(b => b.x > 0 && b.x < this.width && b.y > 0 && b.y < this.height);
-    const missed = before - this.bullets.length;
-    if (missed > 0) this.missed_shots += missed;
+    }
+
+    // Trigger shake effect only when edge is hit (not every frame)
+    if (hitEdge) {
+      this.triggerShake(edgeDirection);
+    }
+  },
+
+  triggerShake(direction) {
+    const hoverArea = document.getElementById("hover-area");
+    if (!hoverArea) return;
+
+    this.canvas_movement.x += direction.x;
+    this.canvas_movement.y += direction.y;
+
+    hoverArea.style.transform = `translate(${this.canvas_movement.x}px, ${this.canvas_movement.y}px)`;
+
+    clearTimeout(this.canvas_movement.timer);
+    this.canvas_movement.timer = setTimeout(() => {
+      hoverArea.style.transform = "translate(0, 0)";
+      this.canvas_movement.x = 0;
+      this.canvas_movement.y = 0;
+    }, 200);
   },
 
   update_clay_target() {
     if (!this.clay_target) return;
     this.clay_target.x += this.clay_target.vx;
     this.clay_target.phase += this.clay_target.vx * this.clay_target.freq;
-    this.clay_target.y = this.clay_target.base_y + Math.sin(this.clay_target.phase) * this.clay_target.amplitude;
+    this.clay_target.y =
+      this.clay_target.base_y +
+      Math.sin(this.clay_target.phase) * this.clay_target.amplitude;
     // Remove if out of bounds
     if (
-      (this.clay_target.vx > 0 && this.clay_target.x - this.clay_target.r > this.width) ||
+      (this.clay_target.vx > 0 &&
+        this.clay_target.x - this.clay_target.r > this.width) ||
       (this.clay_target.vx < 0 && this.clay_target.x + this.clay_target.r < 0)
     ) {
       this.clay_target = null;
@@ -240,18 +249,23 @@ const stick_figure_game = {
   },
 
   detect_hits() {
-    if (this.clay_target) {
-      this.bullets.forEach((b, bi) => {
-        const t = this.clay_target;
-        const dx = b.x - t.x;
-        const dy = b.y - t.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        if (distance < t.r + 5) {
-          this.bullets.splice(bi, 1);
-          this.clay_target = null;
-          this.targets_destroyed++;
-        }
-      });
+    if (!this.clay_target) return;
+
+    const t = this.clay_target;
+    const hitRadius = (t.r + 5) * (t.r + 5); // Square for faster comparison
+
+    for (let i = this.bullets.length - 1; i >= 0; i--) {
+      const b = this.bullets[i];
+      const dx = b.x - t.x;
+      const dy = b.y - t.y;
+      const distSquared = dx * dx + dy * dy;
+
+      if (distSquared < hitRadius) {
+        this.bullets.splice(i, 1);
+        this.clay_target = null;
+        this.targets_destroyed++;
+        break; // Only one bullet can hit per frame
+      }
     }
   },
 
@@ -290,14 +304,14 @@ const stick_figure_game = {
   },
 
   init() {
-    this.ctx = this.canvas.getContext('2d');
+    this.ctx = this.canvas.getContext("2d", { alpha: false });
     this.width = this.canvas.offsetWidth;
     this.height = this.canvas.offsetHeight;
     this.canvas.width = this.width;
     this.canvas.height = this.height;
     this.stickFigure.x = this.width / 2;
     this.stickFigure.y = this.height - 100;
-    this.canvas.addEventListener('click', e => {
+    this.canvas.addEventListener("click", (e) => {
       if (!this.reload.ready) return; // can't shoot yet
       this.reload.ready = false;
       this.reload.last = Date.now();
@@ -319,42 +333,70 @@ const stick_figure_game = {
         x: hand_x,
         y: hand_y,
         vx: vx,
-        vy: vy
+        vy: vy,
       });
     });
-    this.canvas.addEventListener('mousemove', e => {
-      const rect = this.canvas.getBoundingClientRect();
-      this.mouse.x = e.clientX - rect.left;
-      this.mouse.y = e.clientY - rect.top;
-    });
-    window.addEventListener('keydown', e => {
-      this.keys[e.key.toLowerCase()] = true;
-    });
-    window.addEventListener('keyup', e => {
-      this.keys[e.key.toLowerCase()] = false;
-    });
-    window.addEventListener('resize', () => {
-      this.width = this.canvas.offsetWidth;
-      this.height = this.canvas.offsetHeight;
-      this.canvas.width = this.width;
-      this.canvas.height = this.height;
-    });
+    this.canvas.addEventListener(
+      "mousemove",
+      (e) => {
+        const rect = this.canvas.getBoundingClientRect();
+        this.mouse.x = e.clientX - rect.left;
+        this.mouse.y = e.clientY - rect.top;
+      },
+      { passive: true }
+    );
+    window.addEventListener(
+      "keydown",
+      (e) => {
+        this.keys[e.key.toLowerCase()] = true;
+      },
+      { passive: true }
+    );
+    window.addEventListener(
+      "keyup",
+      (e) => {
+        this.keys[e.key.toLowerCase()] = false;
+      },
+      { passive: true }
+    );
+
+    // Debounced resize handler
+    let resizeTimeout;
+    window.addEventListener(
+      "resize",
+      () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+          this.width = this.canvas.offsetWidth;
+          this.height = this.canvas.offsetHeight;
+          this.canvas.width = this.width;
+          this.canvas.height = this.height;
+          // Recenter stick figure on resize
+          this.stickFigure.x = this.width / 2;
+          this.stickFigure.y = this.height - 100;
+        }, 100);
+      },
+      { passive: true }
+    );
     setInterval(() => {
       if (this.running) this.create_target();
     }, 1500);
-  }
+  },
 };
 stick_figure_game.init();
 
-const game_observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      console.info('Play Stick Figure Game');
-      stick_figure_game.play();
-    } else {
-      console.info('Pause Stick Figure Game');
-      stick_figure_game.pause();
-    }
-  });
-}, { threshold: 0.25 });
-game_observer.observe(document.getElementById('game-container')); 
+const game_observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        console.info("Play Stick Figure Game");
+        stick_figure_game.play();
+      } else {
+        console.info("Pause Stick Figure Game");
+        stick_figure_game.pause();
+      }
+    });
+  },
+  { threshold: 0.25 }
+);
+game_observer.observe(document.getElementById("game-container"));
