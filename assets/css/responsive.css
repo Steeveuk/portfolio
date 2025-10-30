@@ -45,6 +45,16 @@
   .modal .col {
     align-items: center !important;
   }
+  /* Contact section responsive for tablets */
+  #contact .glow-box-wrapper {
+    width: 95% !important;
+  }
+  .contact-content {
+    padding: 30px 20px;
+  }
+  .contact-content h3 {
+    font-size: 1.75rem;
+  }
 }
 
 @media (max-width: 500px) {
@@ -81,5 +91,23 @@
   html,
   body {
     overflow-x: hidden;
+  }
+  /* Contact section responsive */
+  #contact .glow-box-wrapper {
+    width: 100% !important;
+    padding: 0;
+  }
+  .contact-content {
+    padding: 20px 15px;
+  }
+  .contact-content h3 {
+    font-size: 1.5rem;
+  }
+  .contact-content p {
+    font-size: 0.95rem;
+  }
+  .email-button {
+    padding: 12px 24px;
+    font-size: 16px;
   }
 }
