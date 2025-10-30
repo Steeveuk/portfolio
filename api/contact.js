@@ -1,11 +1,9 @@
-import brevo from "@getbrevo/brevo";
+import * as Brevo from "@getbrevo/brevo";
 
 // Initialize Brevo API client
-let apiInstance = new brevo.TransactionalEmailsApi();
-apiInstance.setApiKey(
-  brevo.TransactionalEmailsApiApiKeys.apiKey,
-  process.env.BREVO_API_KEY
-);
+const apiInstance = new Brevo.TransactionalEmailsApi();
+// Set API key (use the 'apiKey' key name expected by the SDK)
+apiInstance.setApiKey("apiKey", process.env.BREVO_API_KEY);
 
 // Validation functions
 function sanitizeInput(data) {
