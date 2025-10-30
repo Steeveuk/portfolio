@@ -52,38 +52,31 @@
           <div class="col col50">
             <div class="code-segment" id="code-segment-2">
               <div class="code-box" style="height: 560px" data-aos="fade-right">
-                <div class="code-content">
-                  <span class="comment">// Text character animation</span>
-                  <span class="keyword">const</span>
-                  <span class="function">animate_chars</span> = () => {
-                  <span class="keyword">try</span> {
-                  <span class="function">anime</span>({
-                  <span class="keyword">targets</span>:
-                  <span class="function">$</span>(<span class="string"
-                    >'.animated-char'</span
-                  >).<span class="function">toArray</span>(),
-                  <span class="keyword">translateY</span>: [ {
-                  <span class="keyword">value</span>: -30,
-                  <span class="keyword">duration</span>: 300,
-                  <span class="keyword">easing</span>:
-                  <span class="string">'easeOutQuad'</span> }, {
-                  <span class="keyword">value</span>: 0,
-                  <span class="keyword">duration</span>: 800,
-                  <span class="keyword">easing</span>:
-                  <span class="string">'easeOutBounce'</span> } ],
-                  <span class="keyword">rotate</span>: {
-                  <span class="keyword">value</span>:
-                  <span class="string">'360deg'</span>,
-                  <span class="keyword">duration</span>: 900,
-                  <span class="keyword">easing</span>:
-                  <span class="string">'linear'</span>
-                  },
-                  <span class="keyword">delay</span>:
-                  <span class="function">anime.stagger</span>(50) }); }
-                  <span class="keyword">catch</span> (error) {
-                  console.error(<span class="string">'Animation error:'</span>,
-                  error); } }; animate_chars();
-                </div>
+                <div class="code-content"></div>
+                <script>
+                  document.querySelector(
+                    "#code-segment-2 .code-content"
+                  ).innerHTML = `<span class="comment">// Text character animation</span>
+<span class="keyword">const</span> <span class="function">animate_chars</span> = () => {
+  <span class="keyword">try</span> {
+    <span class="function">anime</span>({
+      <span class="keyword">targets</span>: <span class="function">$</span>(<span class="string">'.animated-char'</span>).<span class="function">toArray</span>(),
+      <span class="keyword">translateY</span>: [
+        { <span class="keyword">value</span>: -30, <span class="keyword">duration</span>: 300, <span class="keyword">easing</span>: <span class="string">'easeOutQuad'</span> }, 
+        { <span class="keyword">value</span>: 0, <span class="keyword">duration</span>: 800, <span class="keyword">easing</span>: <span class="string">'easeOutBounce'</span> }
+      ],
+      <span class="keyword">rotate</span>: {
+        <span class="keyword">value</span>: <span class="string">'360deg'</span>, <span class="keyword">duration</span>: 900, <span class="keyword">easing</span>: <span class="string">'linear'</span>
+      },
+      <span class="keyword">delay</span>: <span class="function">anime.stagger</span>(50)
+    });
+  } <span class="keyword">catch</span> (error) {
+    console.error(<span class="string">'Animation error:'</span>, error);
+  }
+};
+animate_chars();
+                  `;
+                </script>
               </div>
 
               <div class="output-text" data-segment-output>
@@ -179,28 +172,23 @@
           <div class="col">
             <div class="code-segment" id="code-segment-1">
               <div class="code-box" style="height: 395px" data-aos="fade-left">
-                <div class="code-content">
-                  <span class="comment"
-                    >// Fetch data from the API endpoint</span
-                  >
-                  <span class="keyword">const</span>
-                  <span class="function">fetch_data</span> =
-                  <span class="keyword">async</span> () => {
-                  <span class="keyword">try</span> {
-                  <span class="keyword">const</span> response =
-                  <span class="keyword">await</span> fetch(<span class="string"
-                    >'/api/data'</span
-                  >); <span class="keyword">const</span> data =
-                  <span class="keyword">await</span> response.json();
-                  document.querySelector(<span class="string"
-                    >'[data-segment-output]'</span
-                  >).textContent =
-                  <span class="string">'✅ Data fetched: '</span> +
-                  data.message; } <span class="keyword">catch</span> (error) {
-                  console.error(<span class="string"
-                    >'Error fetching data:'</span
-                  >, error); } }; fetch_data();
-                </div>
+                <div class="code-content"></div>
+                <script>
+                  document.querySelector(
+                    "#code-segment-1 .code-content"
+                  ).innerHTML = `<span class="comment">// Fetch data from the API endpoint</span>
+<span class="keyword">const</span> <span class="function">fetch_data</span> = <span class="keyword">async</span> () => {
+    <span class="keyword">try</span> {
+      <span class="keyword">const</span> response = <span class="keyword">await</span> fetch(<span class="string">'/api/data'</span>);
+      <span class="keyword">const</span> data = <span class="keyword">await</span> response.json();
+      document.querySelector(<span class="string">'[data-segment-output]'</span>).textContent = <span class="string">'✅ Data fetched: '</span> + data.message;
+    } <span class="keyword">catch</span> (error) {
+      console.error(<span class="string">'Error fetching data:'</span>, error);
+    }
+};
+fetch_data();
+                  `;
+                </script>
               </div>
               <div class="output-text" data-segment-output>
                 ✅ Data fetched: hey there!
@@ -443,6 +431,7 @@
           <div class="hover-direction" id="hover-effect"></div>
         </div>
       </section>
+
       <footer>
         <div class="tcent">
           <p>

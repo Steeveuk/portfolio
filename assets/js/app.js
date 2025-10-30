@@ -14,7 +14,7 @@ jQuery(document).ready(function ($) {
   setup_modal_events();
   setup_iframe_source();
   setup_video_autoplay();
-  setup_email_form();
+  setup_ajax_form();
 });
 
 //!!! Functions
@@ -300,17 +300,6 @@ function setup_ajax_form() {
   $("form[data-ajax-form]").on("submit", function (e) {
     $t = $(this);
     e.preventDefault();
-
-    // Get the submit button
-    const $submitBtn = $t.find('button[type="submit"]');
-    const originalText = $submitBtn.text();
-
-    // Show loading state
-    $submitBtn.prop("disabled", true).text("Sending...").addClass("loading");
-
-    // Clear any previous messages
-    $t.find(".ajax-response").html("");
-
     const formData = $(this).serialize();
 
     $.ajax({
@@ -324,45 +313,17 @@ function setup_ajax_form() {
           $t.find(".ajax-response").html(
             '<div class="success">' + response.message + "</div>"
           );
-          // Clear the form on success
-          $t.find("input, select, textarea").val("");
-          // Change button to success state temporarily
-          $submitBtn
-            .text("Message Sent!")
-            .removeClass("loading")
-            .addClass("success");
-
-          // Reset button after 3 seconds
-          setTimeout(() => {
-            $submitBtn
-              .prop("disabled", false)
-              .text(originalText)
-              .removeClass("success");
-          }, 3000);
         } else {
           $t.find(".ajax-response").html(
             '<div class="error">' + response.errors.join("<br>") + "</div>"
           );
-          // Reset button immediately on error
-          $submitBtn
-            .prop("disabled", false)
-            .text(originalText)
-            .removeClass("loading");
         }
+
+        //Clear the form
+        $t.find("input, select, textarea").val("");
       },
       error: function (xhr, status, error) {
         console.error(xhr.responseText);
-
-        // Show error message
-        $t.find(".ajax-response").html(
-          '<div class="error">An error occurred while sending your message. Please try again.</div>'
-        );
-
-        // Reset button on error
-        $submitBtn
-          .prop("disabled", false)
-          .text(originalText)
-          .removeClass("loading");
       },
     });
   });
