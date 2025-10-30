@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Oswald:wght@200..700&family=Outfit:wght@100..900&family=Petit+Formal+Script&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Oswald:wght@200..700&family=Outfit:wght@100..900&family=Petit+Formal+Script&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 /* Sure, I could use a preprocessor and optimize this css but... For a portfolio this size I think its fine */
 * {
@@ -59,7 +59,7 @@ header nav ul {
 header nav a {
   color: #ff8c00;
   text-decoration: none;
-  transition: all .5s ease;
+  transition: all 0.5s ease;
 }
 header nav a.active,
 header nav a:hover {
@@ -125,11 +125,11 @@ footer {
 }
 #fractal_container {
   position: relative;
-  width: 800px;   /* Or whatever size you want */
+  width: 800px; /* Or whatever size you want */
   height: 600px;
   margin: 0 auto;
 }
-#intro { 
+#intro {
   margin-top: -410px;
   margin-bottom: 210px;
   position: relative;
@@ -140,7 +140,7 @@ footer {
   background: #1e1e1e70;
   padding: 20px;
   border-radius: 20px;
-  box-shadow: 0px 0px 10px #515151; 
+  box-shadow: 0px 0px 10px #515151;
   text-shadow: 0px 0px 10px #000;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px); /* for Safari */
@@ -148,7 +148,8 @@ footer {
 
 #fractalCanvas {
   position: absolute;
-  top: 0; left: 0;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   pointer-events: none;
@@ -250,7 +251,7 @@ footer {
   content: none;
 }
 .orange-border::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -259,10 +260,10 @@ footer {
   background: #ff9203;
   /* Subtle points at top and bottom */
   clip-path: polygon(
-    0 0,        /* top left */
-    100% 8px,   /* top right (gentle point) */
-    100% 98%,   /* bottom right (gentle point) */
-    0 100%      /* bottom left */
+    0 0,
+    /* top left */ 100% 8px,
+    /* top right (gentle point) */ 100% 98%,
+    /* bottom right (gentle point) */ 0 100% /* bottom left */
   );
   z-index: 1;
   pointer-events: none;
@@ -273,7 +274,7 @@ footer {
   padding-right: 20px;
 }
 .orange-border-right::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   right: 0;
@@ -282,10 +283,10 @@ footer {
   background: #ff9203;
   /* Subtle points at top and bottom */
   clip-path: polygon(
-    100% 0,    /* top right */
-    0 8px,     /* top left (gentle point) */
-    0 98%,     /* bottom left (gentle point) */
-    100% 100%  /* bottom right */
+    100% 0,
+    /* top right */ 0 8px,
+    /* top left (gentle point) */ 0 98%,
+    /* bottom left (gentle point) */ 100% 100% /* bottom right */
   );
   z-index: 1;
   pointer-events: none;
@@ -331,10 +332,18 @@ footer {
   font-family: "JetBrains Mono", monospace;
 }
 
-.keyword { color: #569CD6; }
-.string { color: #CE9178; }
-.comment { color: #6A9955; }
-.function { color: #DCDCAA; }
+.keyword {
+  color: #569cd6;
+}
+.string {
+  color: #ce9178;
+}
+.comment {
+  color: #6a9955;
+}
+.function {
+  color: #dcdcaa;
+}
 
 .code-segment .output-text {
   margin-top: 40px;
@@ -400,7 +409,7 @@ footer {
 }
 
 .shiny-divider::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -200%;
@@ -428,7 +437,7 @@ footer {
 /* Left triangle */
 .shiny-divider-points::before,
 .shiny-divider-points::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   width: 0;
@@ -580,11 +589,53 @@ footer {
   font-weight: bold;
   transition: background 0.3s ease, transform 0.2s ease;
   float: right;
+  position: relative;
 }
 
 .submit-button:hover {
   background: #ffa52b;
   transform: translateY(-2px);
+}
+
+.submit-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.submit-button.loading {
+  background: #999;
+  color: #fff;
+  pointer-events: none;
+}
+
+.submit-button.loading::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  margin: auto;
+  border: 2px solid transparent;
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.submit-button.success {
+  background: #28a745;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+@keyframes spin {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
 }
 
 .honeypot {
@@ -596,7 +647,7 @@ footer {
   position: relative;
   width: 80%;
   margin: 30px auto;
-  transition: all .3s ease;
+  transition: all 0.3s ease;
   left: 0;
   top: 0;
 }
@@ -631,6 +682,70 @@ footer {
 
 .glow-box-wrapper:hover .neon-outline {
   filter: blur(10px) brightness(1.5);
+}
+
+.contact-content {
+  text-align: center;
+  padding: 40px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.contact-content h3 {
+  color: #ff9203;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.contact-content p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  color: #ccc;
+}
+
+.email-button {
+  display: inline-block;
+  background: #ff9203;
+  color: #1e1e1e;
+  text-decoration: none;
+  padding: 16px 32px;
+  font-size: 18px;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  margin-top: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.email-button:hover {
+  background: #ffa52b;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(255, 146, 3, 0.3);
+  color: #1e1e1e;
+  text-decoration: none;
+}
+
+.email-button:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.email-button:hover:before {
+  left: 100%;
 }
 #hover-area.width100 {
   width: 100%;
@@ -697,7 +812,7 @@ footer {
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
   opacity: 0;
   transform: scale(0.95) translateY(20px);
-  transition: all .8s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
   z-index: 11;
   visibility: hidden;
   left: 0;
@@ -774,7 +889,8 @@ footer {
 }
 
 @keyframes wave {
-  0%, 100% {
+  0%,
+  100% {
     transform: rotate(0deg) translateY(0);
   }
   25% {

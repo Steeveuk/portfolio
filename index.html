@@ -422,69 +422,27 @@
 
         <div class="glow-box-wrapper" id="hover-area">
           <div class="glow-box">
-            <form
-              action="/api/contact"
-              method="post"
-              class="orange-theme-form"
-              data-ajax-form="contact"
-            >
-              <input type="hidden" name="frmContact" value="1" />
+            <div class="contact-content">
+              <h3>Let's Work Together</h3>
+              <p>
+                Ready to start your next project? Whether you need a website,
+                plugin, theme, or ongoing maintenance, I'm here to help bring
+                your ideas to life.
+              </p>
 
-              <div class="form-input">
-                <label for="name">Name</label>
-                <input type="text" name="name" id="name" required />
-              </div>
-
-              <div class="form-input">
-                <label for="email">Email</label>
-                <input type="email" name="email" id="email" required />
-              </div>
-
-              <div class="form-input">
-                <label for="telephone">Telephone</label>
-                <input type="tel" name="telephone" id="telephone" />
-              </div>
-
-              <div class="form-input">
-                <label for="project-type">Type of Project</label>
-                <select name="project_type" id="project-type" required>
-                  <option value="">--</option>
-                  <option value="website">Website</option>
-                  <option value="plugin">Plugin</option>
-                  <option value="theme">Theme</option>
-                  <option value="maintenance">Maintenance</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-
-              <div class="form-input">
-                <label for="message">Brief</label>
-                <textarea
-                  name="message"
-                  id="message"
-                  rows="5"
-                  required
-                  minlength="100"
-                  placeholder="Please provide a brief description of your project (100 characters minimum)"
-                ></textarea>
-              </div>
-
-              <div class="form-input honeypot">
-                <label for="website">Website</label>
-                <input type="text" name="website" id="website" />
-              </div>
-
-              <button type="submit" class="submit-button">Send Message</button>
-
-              <div class="ajax-response"></div>
-            </form>
+              <a
+                href="mailto:work@steeve.co.uk?subject=Project Inquiry&body=Hi Steve,%0A%0AI'm interested in working with you on a project. Here are the details:%0A%0AProject Type: %0AProject Description: %0A%0ALooking forward to hearing from you!"
+                class="email-button"
+              >
+                Contact Me
+              </a>
+            </div>
           </div>
 
           <div class="neon-outline"></div>
           <div class="hover-direction" id="hover-effect"></div>
         </div>
       </section>
-
       <footer>
         <div class="tcent">
           <p>
